@@ -1,0 +1,25 @@
+img {
+    max-width: 100%;
+}
+
+.description {
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+}
+
+.list-category {
+    margin-top: 50px;
+    transition: all 0.5s;
+
+}
+
+.list-category a h3 {
+    color: brown;
+    transition: all 0.5s;
+}
+
+.list-category a h3:hover {
+    color: rgb(131, 53, 53);
+    letter-spacing: 1.2px;
+}

@@ -73,24 +73,36 @@ class PhotosUpload extends Component
         session()->flash('success', 'Imaginile au fost uploadate cu succes.');
         $this->photos = null;
         $this->images = $this->model->photos()->orderBy('position')->get();
+
+        $this->deleteOldTempFiles();
     }
 
-    protected function cleanupOldUploads()
+    // protected function cleanupOldUploads()
+    // {
+
+    //     $storage = Storage::disk('local');
+
+    //     foreach ($storage->allFiles('livewire-tmp') as $filePathname) {
+    //         // On busy websites, this cleanup code can run in multiple threads causing part of the output
+    //         // of allFiles() to have already been deleted by another thread.
+    //         if (!$storage->exists($filePathname)) continue;
+
+    //         $yesterdaysStamp = now()->subSeconds(3)->timestamp;
+    //         if ($yesterdaysStamp > $storage->lastModified($filePathname)) {
+    //             $storage->delete($filePathname);
+    //         }
+    //     }
+    // }
+
+    public function deleteOldTempFiles()
     {
+        $oldFiles = Storage::files('livewire-tmp');
 
-        $storage = Storage::disk('local');
-
-        foreach ($storage->allFiles('livewire-tmp') as $filePathname) {
-            // On busy websites, this cleanup code can run in multiple threads causing part of the output
-            // of allFiles() to have already been deleted by another thread.
-            if (!$storage->exists($filePathname)) continue;
-
-            $yesterdaysStamp = now()->subSeconds(3)->timestamp;
-            if ($yesterdaysStamp > $storage->lastModified($filePathname)) {
-                $storage->delete($filePathname);
-            }
+        foreach ($oldFiles as $file) {
+            Storage::delete($file);
         }
     }
+
 
     public function deletePhoto($id)
     {

@@ -88,26 +88,38 @@ class EditPhoto extends Component
         $this->photo->save();
 
         $this->image = null;
+
+        $this->deleteOldTempFiles();
     }
 
-
-
-    protected function cleanupOldUploads()
+    public function deleteOldTempFiles()
     {
+        $oldFiles = Storage::files('livewire-tmp');
 
-        $storage = Storage::disk('local');
-
-        foreach ($storage->allFiles('livewire-tmp') as $filePathname) {
-            // On busy websites, this cleanup code can run in multiple threads causing part of the output
-            // of allFiles() to have already been deleted by another thread.
-            if (!$storage->exists($filePathname)) continue;
-
-            $yesterdaysStamp = now()->subSeconds(3)->timestamp;
-            if ($yesterdaysStamp > $storage->lastModified($filePathname)) {
-                $storage->delete($filePathname);
-            }
+        foreach ($oldFiles as $file) {
+            Storage::delete($file);
         }
     }
+
+
+
+
+    // protected function cleanupOldUploads()
+    // {
+
+    //     $storage = Storage::disk('local');
+
+    //     foreach ($storage->allFiles('livewire-tmp') as $filePathname) {
+    //         // On busy websites, this cleanup code can run in multiple threads causing part of the output
+    //         // of allFiles() to have already been deleted by another thread.
+    //         if (!$storage->exists($filePathname)) continue;
+
+    //         $yesterdaysStamp = now()->subSeconds(3)->timestamp;
+    //         if ($yesterdaysStamp > $storage->lastModified($filePathname)) {
+    //             $storage->delete($filePathname);
+    //         }
+    //     }
+    // }
 
 
 

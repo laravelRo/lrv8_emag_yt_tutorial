@@ -73,9 +73,11 @@ class SectionsController extends Controller
     // ruta pentru updatarea unei sectiuni
     public function updateSection(SectionAddRequest $request, $id)
     {
-        $request->validate([
-            'slug' => 'required|max:255|unique:sections,slug,' . $id,
-        ]);
+        if ($request->change_slug) {
+            $request->validate([
+                'slug' => 'required|max:255|unique:sections,slug,' . $id,
+            ]);
+        }
         $section = Section::findOrFail($id);
         if ($request->hasFile('photo')) {
             //stergem vechea fotografie a membrului staff
@@ -94,7 +96,9 @@ class SectionsController extends Controller
         }
 
         $section->name = $request->name;
-        $section->slug = Str::slug($request->slug) . '_' . Str::random(4);;
+        if ($request->change_slug) {
+            $section->slug = Str::slug($request->slug);
+        }
         $section->description = $request->description;
 
         $section->position = $request->position;

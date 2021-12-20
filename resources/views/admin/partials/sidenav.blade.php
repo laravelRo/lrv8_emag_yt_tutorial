@@ -21,6 +21,10 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
                 Categories
             </a>
+            <a class="nav-link" href="{{ route('brands.list') }}">
+                <div class="sb-nav-link-icon"><i class="fas fa-copyright"></i></div>
+                Brands
+            </a>
 
             {{-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
                 aria-expanded="false" aria-controls="collapseLayouts">

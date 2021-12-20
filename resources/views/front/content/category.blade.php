@@ -42,7 +42,7 @@
                 <h1 class="text-primary text-center my-3">{{ $category->name }}</h1>
 
                 {{-- sliderul categoriei --}}
-                @include('front.content.category-slider')
+                @include('front.content.carusel-photos',['carusel'=>$category])
 
                 {{-- descrierea categoriei --}}
                 <div class="row description">

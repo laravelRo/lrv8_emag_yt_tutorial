@@ -81,11 +81,12 @@ class CategoriesController extends Controller
     public function updateCategory(CategoriesAddRequest $request, $id)
     {
         $category = Category::findOrFail($id);
-
-        //validarea slug-ului
-        $request->validate([
-            'slug' => 'required|max:255|unique:sections,slug,' . $id,
-        ]);
+        if ($request->change_slug) {
+            //validarea slug-ului
+            $request->validate([
+                'slug' => 'required|max:255|unique:sections,slug,' . $id,
+            ]);
+        }
 
         if ($request->hasFile('photo')) {
             //stergem vechea fotografie a categoriei
@@ -104,7 +105,9 @@ class CategoriesController extends Controller
         }
 
         $category->name = $request->name;
-        $category->slug = Str::slug($request->slug) . '_' . Str::random(4);
+        if ($request->change_slug) {
+            $category->slug = Str::slug($request->slug);
+        }
         $category->title = $request->title;
         $category->description = $request->description;
 

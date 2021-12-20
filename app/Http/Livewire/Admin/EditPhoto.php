@@ -39,8 +39,13 @@ class EditPhoto extends Component
     //updatam campul position
     public function updatedPosition($value)
     {
+        $this->validate([
+            'position' => 'numeric|integer'
+        ], [
+            'position.integer' => 'pozitia imaginii trebuie sa fie un numar intreg'
+        ]);
 
-        $this->photo->position = $value;
+        $this->photo->position = (int)$value;
         $this->photo->save();
 
 

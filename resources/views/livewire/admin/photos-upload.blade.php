@@ -89,7 +89,7 @@
 
 
             @livewire('admin.edit-photo',['current'=>$loop->iteration, 'photo'=>$photo,
-            'path'=>'categories/'.$model->id .'/'], key($loop->index))
+            'path'=>$path], key($loop->index))
 
 
         @empty

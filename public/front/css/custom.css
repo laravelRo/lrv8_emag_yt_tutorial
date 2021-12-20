@@ -23,3 +23,15 @@ img {
     color: rgb(131, 53, 53);
     letter-spacing: 1.2px;
 }
+
+.offer .text-md-right img {
+    left: 10%;
+}
+
+.offer img {
+    position: absolute;
+    max-width: 50%;
+    max-height: 90%;
+    bottom: 20%;
+
+}

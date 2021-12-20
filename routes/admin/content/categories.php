@@ -18,14 +18,4 @@ Route::prefix('staff/content/categories')->middleware(['auth:staff'])->group(fun
 
     //adaugarea unei galerii foto pentru categorii
     Route::get('photos/{id}',  [CategoriesController::class, 'photosCategory'])->name('categories.photos');
-
-
-    // Route::get('new', [SectionsController::class, 'newSection'])->name('sections.new');
-
-    // //crearea unei noi sectiuni
-    // Route::post('new', [SectionsController::class, 'addSection'])->name('sections.add');
-    // //afisarea formularului de editare a unei sectiuni
-    // Route::get('edit/{id}', [SectionsController::class, 'editSection'])->name('sections.edit');
-    // //ruta pentru updatarea unei sectiuni
-    // Route::put('update/{id}', [SectionsController::class, 'updateSection'])->name('sections.update');
 });

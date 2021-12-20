@@ -39,8 +39,12 @@ require __DIR__ . '/admin/users.php';
 
 //rutele pentru sectiuni
 require __DIR__ . '/admin/content/sections.php';
+
 //rutele pentru categorii
 require __DIR__ . '/admin/content/categories.php';
+
+//rutele pentru branduri
+require __DIR__ . '/admin/content/brands.php';
 
 
 // ======================

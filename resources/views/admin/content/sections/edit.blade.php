@@ -30,6 +30,11 @@
                             @enderror
                         </div>
                         <div class="col-md-3">
+                            <div class="form-check form-check-inline">
+                                <input name="change_slug" class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                                    value="true">
+                                {{-- <label class="form-check-label" for="inlineCheckbox1">1</label> --}}
+                            </div>
                             <label for="slug" class="form-label">Slug*</label>
                             <input name="slug" value="{{ old('slug', $section->slug) }}" type="text"
                                 class="form-control @error('slug') is-invalid @enderror" id="slug" required>

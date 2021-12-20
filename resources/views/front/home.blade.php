@@ -14,7 +14,9 @@
         </div>
     </div>
     @include('front.partials.featured')
-    @include('front.partials.promo')
+    {{-- @include('front.partials.promo') --}}
+    <x-content.promo-brands />
     @include('front.partials.categories')
-    @include('front.partials.brands')
+    {{-- @include('front.partials.brands') --}}
+    <x-content.brands-logos />
 @endsection

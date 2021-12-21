@@ -24,7 +24,7 @@ class PromoBrands extends Component
      */
     public function render()
     {
-        $brands = Brand::all('name', 'title', 'active', 'photo')->random(2)->where('active', true);
+        $brands = Brand::all('name', 'title', 'active', 'photo', 'slug')->random(2)->where('active', true);
         return view('components.content.promo-brands')
             ->with('brands', $brands);
     }

@@ -25,6 +25,10 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-copyright"></i></div>
                 Brands
             </a>
+            <a class="nav-link" href="{{ route('products.list') }}">
+                <div class="sb-nav-link-icon"><i class="fas fa-shopping-basket"></i></div>
+                Products
+            </a>
 
             {{-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
                 aria-expanded="false" aria-controls="collapseLayouts">

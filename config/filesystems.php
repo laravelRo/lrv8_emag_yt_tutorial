@@ -48,6 +48,13 @@ return [
             'url' => env('APP_URL') . '/public',
             'visibility' => 'public',
         ],
+        'content' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/content',
+            'url' => env('APP_URL') . '/public',
+            'visibility' => 'public',
+        ],
+
 
         's3' => [
             'driver' => 's3',

@@ -9,6 +9,11 @@ class Brand extends Model
 {
     use HasFactory;
 
+    //has many products
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'brand_id', 'id');
+    }
 
     public function getUrlAttribute()
     {

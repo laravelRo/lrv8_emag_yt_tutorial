@@ -15,6 +15,12 @@ class Section extends Model
         return $this->hasMany(Category::class, 'section_id')->orderBy('position');
     }
 
+    //has many products
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'section_id');
+    }
+
     public function photoUrl()
     {
         return '/content/sections/' . $this->photo;

@@ -28,3 +28,8 @@
 }
 
 /* <<<=== butoane rotunde */
+
+img.photo-upload:hover {
+    border: 1px violet solid;
+    padding: 2px;
+}

@@ -58,7 +58,8 @@
                                                 <td>{{ $category->position }}</td>
 
                                                 <td style="width: 220px;">
-                                                    @livewire('admin.sections-status',['model'=>$category])
+                                                    @livewire('admin.sections-status',
+                                                    ['model'=>$category])
                                                 </td>
 
                                                 <td style="width: 100px;">

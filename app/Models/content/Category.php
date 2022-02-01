@@ -17,6 +17,12 @@ class Category extends Model
         return $this->belongsTo(Section::class, 'section_id');
     }
 
+    //has many products
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'category_product', 'category_id', 'product_id');
+    }
+
     //has many photos polimorphic
     public function photos()
     {

@@ -46,6 +46,9 @@ require __DIR__ . '/admin/content/categories.php';
 //rutele pentru branduri
 require __DIR__ . '/admin/content/brands.php';
 
+//rutele pentru produse
+require __DIR__ . '/admin/content/products.php';
+
 
 // ======================
 //rutele frontend pentru continut

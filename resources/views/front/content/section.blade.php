@@ -14,7 +14,14 @@
     <!-- Page Header Start -->
     <div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-            <h1 class="font-weight-semi-bold text-uppercase mb-3 mt-2">{{ $section->name }}</h1>
+            <h1 class="font-weight-semi-bold text-uppercase mb-3 mt-2">{{ $section->name }}
+                <a href="{{ route('section.products', $section->slug) }}" title="{{ $section->name }} products">
+                    <span class="text-warning text-lowercase" style="font-size: 0.6em;">view products
+                        ({{ $section->products_count }})
+                    </span>
+                </a>
+            </h1>
+
             <div class="my-2">
                 <img src="{{ $section->photoUrl() }}" alt="" style="max-width: 100%;">
             </div>
@@ -24,7 +31,12 @@
             <div class="d-inline-flex mb-2">
                 <p class="m-0"><a href="{{ route('home') }}">Home</a></p>
                 <p class="m-0 px-2">-</p>
-                <p class="m-0">{{ $section->name }}</p>
+                <p class="m-0">{{ $section->name }} - </p>
+                <p class="m-0"> <a href="{{ route('section.products', $section->slug) }}"
+                        title="{{ $section->name }} products">
+                        <span class="text-warning"> view products</span>
+                    </a>
+                </p>
             </div>
         </div>
     </div>

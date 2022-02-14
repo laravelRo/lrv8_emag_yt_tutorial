@@ -2,6 +2,16 @@ img {
     max-width: 100%;
 }
 
+.product-header img {
+    max-height: 250px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px,
+        rgb(51, 51, 51) 0px 0px 0px 3px;
+
+}
+
 .description {
     margin-top: 50px;
     margin-bottom: 50px;

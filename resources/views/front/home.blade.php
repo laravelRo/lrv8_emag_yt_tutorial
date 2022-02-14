@@ -17,6 +17,8 @@
     {{-- @include('front.partials.promo') --}}
     <x-content.promo-brands />
     @include('front.partials.categories')
+
+    @include('front.partials.popular')
     {{-- @include('front.partials.brands') --}}
     <x-content.brands-logos />
 @endsection

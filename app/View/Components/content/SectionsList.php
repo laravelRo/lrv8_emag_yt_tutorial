@@ -26,7 +26,8 @@ class SectionsList extends Component
      */
     public function render()
     {
-        $sections = Section::where('active', true)
+        $sections = Section::withCount('products')
+            ->where('active', true)
             ->orderBy('position')
             ->get();
 

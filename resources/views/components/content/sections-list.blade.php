@@ -8,8 +8,15 @@
     <div class="navbar-nav w-100 overflow-hidden">
 
         @forelse($sections_menu as $section)
-            <a href="{{ route('section', $section->slug) }}" class="nav-item nav-link"><i
-                    class="{{ $section->icon ? $section->icon : 'fas fa-th-list' }} mr-2"></i>{{ $section->name }}</a>
+            <div class="nav-item nav-link py-3">
+                <a href="{{ route('section', $section->slug) }}" style="color:#6c757d;">
+                    <i class="{{ $section->icon ? $section->icon : 'fas fa-th-list' }} mr-2"></i>{{ $section->name }}
+                    -
+                </a>
+                <a href="{{ route('section.products', $section->slug) }}" style="color:#6c757d;"> products
+                    {{ $section->products_count }}</a>
+            </div>
+
         @empty
             <p> No sections in site </p>
         @endforelse

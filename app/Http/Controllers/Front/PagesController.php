@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Models\content\Product;
 use App\Models\content\Section;
+use App\Models\content\Category;
+use App\Http\Controllers\Controller;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PagesController extends Controller
@@ -12,9 +14,17 @@ class PagesController extends Controller
     //afisam pagina home
     public function homePage()
     {
+        $trandy_products = Product::all('name', 'price', 'discount', 'photo', 'slug')->sortByDesc('views')->take(4);
+        $trandy_categories = Category::select('name', 'photo', 'slug')->withCount(['products'])
+            ->where('promo', '=', 1)
+            ->limit(6)
+            ->get();
+
 
         return view('front.home')
-            ->with('open', true);
+            ->with('open', true)
+            ->with('trandy_products', $trandy_products)
+            ->with('trandy_categories', $trandy_categories);
     }
 
     public function shopPage()

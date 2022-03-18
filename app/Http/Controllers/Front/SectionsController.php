@@ -23,7 +23,7 @@ class SectionsController extends Controller
     public function showSectionProducts($slug)
     {
         $section = Section::with('products')->where('slug', $slug)->first();
-        $products = $section->products()->orderBy('name')->paginate(12);
+        $products = $section->publicProducts();
         return view('front.content.section-products')
             ->with('section', $section)
             ->with('products', $products)
@@ -55,7 +55,7 @@ class SectionsController extends Controller
     public function showCategoryProducts($slug)
     {
         $category = Category::withCount('products')->where('slug', $slug)->first();
-        $products = $category->products()->orderBy('name')->paginate(12);
+        $products = $category->publicProducts();
         return view('front.content.category-products')
             ->with('category', $category)
             ->with('products', $products)

@@ -15,7 +15,7 @@
     <div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
             <h1 class="font-weight-semi-bold text-uppercase mb-3 mt-2">{{ $section->name }} - products
-                ({{ $section->products()->count() }}) </h1>
+                ({{ $section->publicProducts()->total() }}) </h1>
 
 
             <div class="d-inline-flex mb-2">
@@ -69,6 +69,11 @@
                     </div>
                     @forelse($products as $product)
                         <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+                            {{-- numerotam produsele --}}
+                            <span class="badge badge-secondary float-start">
+                                {{ $products->currentPage() > 1? $loop->iteration + $products->perPage() * ($products->currentPage() - 1): $loop->iteration }}
+                            </span>
+
                             <div class="card product-item border-0 mb-4">
                                 <div
                                     class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
@@ -87,8 +92,7 @@
                                     <a href="{{ route('product', $product->slug) }}" class="btn btn-sm text-dark p-0"><i
                                             class="fas fa-eye text-primary mr-1"></i>View
                                         Detail</a>
-                                    <a href="" class="btn btn-sm text-dark p-0"><i
-                                            class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                                    @livewire('products.add-cart',key(time().'cart'.$product->id))
                                 </div>
                             </div>
                         </div>

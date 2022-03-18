@@ -23,6 +23,16 @@ class Category extends Model
         return $this->belongsToMany(Product::class, 'category_product', 'category_id', 'product_id');
     }
 
+    //public products available for shopping
+    public function publicProducts()
+    {
+        return $this->belongsToMany(Product::class, 'category_product', 'category_id', 'product_id')
+            ->where('active', true)
+            ->where('stock', '>', 0)
+            ->orderBy('name')
+            ->paginate(12);
+    }
+
     //has many photos polimorphic
     public function photos()
     {

@@ -31,7 +31,7 @@ class BrandsController extends Controller
         $brand = Brand::withCount('products')
             ->where('slug', $slug)
             ->first();
-        $products = $brand->products()->orderBy('name')->paginate(12);
+        $products = $brand->publicProducts();
 
         return view('front.content.brand-products')
             ->with('brand', $brand)

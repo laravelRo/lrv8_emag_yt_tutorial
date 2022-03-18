@@ -77,6 +77,11 @@
                     </div>
                     @forelse($products as $product)
                         <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+                            {{-- numerotam produsele --}}
+                            <span class="badge badge-secondary float-start">
+                                {{ $products->currentPage() > 1? $loop->iteration + $products->perPage() * ($products->currentPage() - 1): $loop->iteration }}
+                            </span>
+
                             <div class="card product-item border-0 mb-4">
                                 <div
                                     class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">

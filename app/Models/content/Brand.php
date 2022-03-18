@@ -15,6 +15,16 @@ class Brand extends Model
         return $this->hasMany(Product::class, 'brand_id', 'id');
     }
 
+    //public products available for shopping
+    public function publicProducts()
+    {
+        return $this->hasMany(Product::class, 'brand_id')
+            ->where('active', true)
+            ->where('stock', '>', 0)
+            ->orderBy('name')
+            ->paginate(12);
+    }
+
     public function getUrlAttribute()
     {
         return '/content/brands/' . $this->photo;

@@ -26,5 +26,7 @@
     <link href="{{ asset('front/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('front/css/custom.css') }}" rel="stylesheet">
 
+    @livewireStyles
+
     @yield('customCss')
 </head>

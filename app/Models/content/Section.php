@@ -21,6 +21,18 @@ class Section extends Model
         return $this->hasMany(Product::class, 'section_id');
     }
 
+    //public products available for shopping
+    public function publicProducts()
+    {
+        return $this->hasMany(Product::class, 'section_id')
+            ->where('active', true)
+            ->where('stock', '>', 0)
+            ->orderBy('name')
+            ->paginate(12);
+    }
+
+
+
     public function photoUrl()
     {
         return '/content/sections/' . $this->photo;

@@ -95,7 +95,8 @@
                         </div>
                     </div>
                     {{-- <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button> --}}
-                    @livewire('products.add-cart',key(time().'cart'.$product->id))
+                    @livewire('products.add-cart',
+                    ['product_id'=>$product->id],key(time().'cart'.$product->id))
                 </div>
 
                 <div class="d-flex pt-2">

@@ -92,8 +92,8 @@
                                     <a href="{{ route('product', $product->slug) }}" class="btn btn-sm text-dark p-0"><i
                                             class="fas fa-eye text-primary mr-1"></i>View
                                         Detail</a>
-                                    <a href="" class="btn btn-sm text-dark p-0"><i
-                                            class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                                    @livewire('products.add-cart',
+                                    ['product_id'=>$product->id],key(time().'cart'.$product->id))
                                 </div>
                             </div>
                         </div>

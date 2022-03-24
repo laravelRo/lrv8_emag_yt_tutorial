@@ -49,12 +49,12 @@ class AddCart extends Component
         // utilizatorul este guest
         //========================
         else {
-            //inseram un produs in cos pentru utilizatorul nelogat
-            // $session_id = Session::get('session_id');
-            // if (empty($session_id)) {
-            //     $session_id = Session::getId();
-            //     session(['session_id' => $session_id]);
-            // }
+            // inseram un produs in cos pentru utilizatorul nelogat
+            $session_id = Session::get('session_id');
+            if (empty($session_id)) {
+                $session_id = Session::getId();
+                session(['session_id' => $session_id]);
+            }
 
             //verificam daca produsul exista in cosul acestui utilizator
             $product = Cart::where('product_id', $this->product_id)->where('session_id', Session::getId())->count();

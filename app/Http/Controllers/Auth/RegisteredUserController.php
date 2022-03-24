@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
+use App\Models\shop\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
+use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class RegisteredUserController extends Controller
@@ -67,7 +68,11 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
+
         Auth::login($user);
+
+        //actualizez cosul cu produse
+        Cart::updateUserCart();
 
         // return redirect(RouteServiceProvider::HOME);
         Alert::success('Contul a fost creat', 'Va rugam verificati adresa de email pentru validarea contului')

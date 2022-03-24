@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Cart extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 
     public function product()
     {
@@ -43,5 +44,15 @@ class Cart extends Model
             $total += $item->product->price * $item->qty;
         }
         return $total;
+    }
+
+    //functia statica pentru actualizarea cosului la logarea unui utilizator
+    public static function updateUserCart()
+    {
+        if (!empty(Session::get('session_id'))) {
+            //avem produse ale utilizatorului nelogat in cos
+            Cart::where('session_id', Session::get('session_id'))
+                ->update(['user_id' => Auth::id(), 'session_id' => null]);
+        }
     }
 }

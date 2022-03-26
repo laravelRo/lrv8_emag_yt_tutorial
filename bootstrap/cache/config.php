@@ -6,7 +6,7 @@
     'debug' => true,
     'url' => 'http://lrv9_emag.test',
     'asset_url' => NULL,
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Bucharest',
     'locale' => 'en',
     'fallback_locale' => 'en',
     'faker_locale' => 'en_US',
@@ -650,7 +650,7 @@
   'session' => 
   array (
     'driver' => 'file',
-    'lifetime' => '4320',
+    'lifetime' => '10',
     'expire_on_close' => false,
     'encrypt' => false,
     'files' => 'C:\\xampp\\htdocs\\lrv9_emag\\storage\\framework/sessions',

@@ -2,6 +2,7 @@
 
 namespace App\Models\shop;
 
+use Carbon\Carbon;
 use App\Models\content\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
@@ -54,5 +55,14 @@ class Cart extends Model
             Cart::where('session_id', Session::get('session_id'))
                 ->update(['user_id' => Auth::id(), 'session_id' => null]);
         }
+    }
+
+    //functia care intoarce numarul de produse expirate ale guest
+    public static function countExpiredGuests()
+    {
+        $count = Cart::where('user_id', null)
+            ->where('created_at', '<=', Carbon::now()->subMinutes(3)->toDateTimeString())
+            ->count();
+        return $count;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use Carbon\Carbon;
+use App\Models\shop\Cart;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -25,6 +27,13 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+
+        // stergem cosul cu produse de inregistrarile din sesiune vechi
+        // $schedule->call(function () {
+        //     Cart::where('user_id', null)
+        //         ->where('created_at', '<=', Carbon::now()->subDays(3)->toDateTimeString())
+        //         ->delete();
+        // })->daily();;
     }
 
     /**
@@ -34,7 +43,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

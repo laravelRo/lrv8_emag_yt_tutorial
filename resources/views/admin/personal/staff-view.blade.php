@@ -22,23 +22,23 @@
                 <div class="card-header">
                     <i class="fas fa-table me-1"></i>
                     List of Staff Members -
-                    @if($blocked_members)
-                    <a class="link-success" href="{{ route('show.staff') }}">
-                        Staff members
-                    </a>
+                    @if ($blocked_members)
+                        <a class="link-success" href="{{ route('show.staff') }}">
+                            Staff members
+                        </a>
                     @else
-                    <a class="link-danger " href="{{ route('show.staff', ['blocked' => true]) }}">
-                        Blocked members
-                    </a>
-                    <a href="{{ route('new.staff') }}" class="btn btn-success float-end">
-                        <i class="fas fa-user-plus"></i> Add member
-                    </a>
+                        <a class="link-danger " href="{{ route('show.staff', ['blocked' => true]) }}">
+                            Blocked members
+                        </a>
+                        <a href="{{ route('new.staff') }}" class="btn btn-success float-end">
+                            <i class="fas fa-user-plus"></i> Add member
+                        </a>
                     @endif
 
 
                 </div>
                 <div class="card-body">
-                    <table id="datatablesSimple">
+                    <table class="table" id="datatablesSimple">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -80,53 +80,53 @@
                                         {{ $user->type }}
                                     </td>
                                     <td>
-                                        @if(!$user->trashed())
-                                        <a title="Editeaza membru Staff" href="{{ route('edit.staff', $user->id) }}"
-                                            class="btn btn-success btn-md btn-circle"><i class="fas fa-user-edit fa-2x"></i>
-                                        </a>
+                                        @if (!$user->trashed())
+                                            <a title="Editeaza membru Staff" href="{{ route('edit.staff', $user->id) }}"
+                                                class="btn btn-success btn-md btn-circle"><i
+                                                    class="fas fa-user-edit fa-2x"></i>
+                                            </a>
 
-                                        {{-- //formularul de blocare a unui utilizator --}}
-                                        <form id="form-delete-{{ $user->id }}"
-                                            action="{{ route('block.staff', $user->id) }}" method="POST"
-                                            style="display:inline-block;">
-                                            @csrf
-                                            @method('delete')
-                                        </form>
-                                        <button class="btn btn-danger btn-md btn-circle"
-                                            onclick="deleteConfirm('form-delete-{{ $user->id }}','{{ $user->name }}')">
-                                            <i class="fas fa-user-slash fa-2x"></i>
-                                        </button>
+                                            {{-- //formularul de blocare a unui utilizator --}}
+                                            <form id="form-delete-{{ $user->id }}"
+                                                action="{{ route('block.staff', $user->id) }}" method="POST"
+                                                style="display:inline-block;">
+                                                @csrf
+                                                @method('delete')
+                                            </form>
+                                            <button class="btn btn-danger btn-md btn-circle"
+                                                onclick="deleteConfirm('form-delete-{{ $user->id }}','{{ $user->name }}')">
+                                                <i class="fas fa-user-slash fa-2x"></i>
+                                            </button>
                                         @else
-                                        {{-- restore staff --}}
-                                        <form id="form-restore-{{ $user->id }}"
-                                            action="{{ route('restore.staff', $user->id) }}" method="POST"
-                                            style="display:inline-block;">
-                                            @csrf
-                                            @method('put')
-                                        </form>
+                                            {{-- restore staff --}}
+                                            <form id="form-restore-{{ $user->id }}"
+                                                action="{{ route('restore.staff', $user->id) }}" method="POST"
+                                                style="display:inline-block;">
+                                                @csrf
+                                                @method('put')
+                                            </form>
 
-                                        <button class="btn btn-primary"
-                                        onclick="restoreConfirm('form-restore-{{ $user->id }}','{{ $user->name }}')">
-                                        Restore staff
-                                    </button>
+                                            <button class="btn btn-primary"
+                                                onclick="restoreConfirm('form-restore-{{ $user->id }}','{{ $user->name }}')">
+                                                Restore staff
+                                            </button>
 
-                                    {{-- <<< restore staff --}}
+                                            {{-- <<< restore staff --}}
 
-                                    {{-- remove staff --}}
-                                    <form id="form-remove-{{ $user->id }}"
-                                        action="{{ route('remove.staff', $user->id) }}" method="POST"
-                                        style="display:inline-block;">
-                                        @csrf
-                                        @method('delete')
-                                    </form>
-                                    <button class="btn btn-danger"
-                                    onclick="removeConfirm('form-remove-{{ $user->id }}','{{ $user->name }}')">
-                                    Remove Staff
-                                </button>
+                                            {{-- remove staff --}}
+                                            <form id="form-remove-{{ $user->id }}"
+                                                action="{{ route('remove.staff', $user->id) }}" method="POST"
+                                                style="display:inline-block;">
+                                                @csrf
+                                                @method('delete')
+                                            </form>
+                                            <button class="btn btn-danger"
+                                                onclick="removeConfirm('form-remove-{{ $user->id }}','{{ $user->name }}')">
+                                                Remove Staff
+                                            </button>
 
 
-                                {{-- <<< remove staff --}}
-
+                                            {{-- <<< remove staff --}}
                                         @endif
 
                                         {{-- <button title="Block this user"
@@ -185,7 +185,7 @@
             });
         }
     </script>
-     <script>
+    <script>
         window.removeConfirm = function(formId, name) {
             Swal.fire({
                 icon: 'question',

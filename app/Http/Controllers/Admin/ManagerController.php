@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use App\Models\Staff;
+use App\Models\shop\Cart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
@@ -17,7 +19,6 @@ class ManagerController extends Controller
     {
         if (request('blocked') == true) {
             $users = Staff::onlyTrashed()->orderBy('deleted_at', 'DESC')->get();
-
         } else {
             $users = Staff::all()
                 ->whereNotIn('id', 1)
@@ -146,18 +147,27 @@ class ManagerController extends Controller
 
     public function restoreStaff($id)
     {
-        $staff=Staff::onlyTrashed()->where('id',$id)->first();
+        $staff = Staff::onlyTrashed()->where('id', $id)->first();
         $staff->restore();
         return redirect(route('show.staff'))->with('success', 'Membrul staff ' . $staff->name . ' A fost deblocat!');
     }
 
     public function removeStaff($id)
     {
-        $staff=Staff::onlyTrashed()->where('id',$id)->first();
+        $staff = Staff::onlyTrashed()->where('id', $id)->first();
         $staff->forceDelete();
 
         return redirect(route('show.staff'))
-        ->with('success', 'Membrul staff ' . $staff->name . ' A fost sters definitiv din baza de date!');
+            ->with('success', 'Membrul staff ' . $staff->name . ' A fost sters definitiv din baza de date!');
+    }
 
+    //stergem produsele expirate din cos
+    public function deleteExpiredCart()
+    {
+        Cart::where('user_id', null)
+            ->where('created_at', '<=', Carbon::now()->subDays(3)->toDateTimeString())
+            ->delete();
+
+        return back()->with('success', "Cosul cu produse a fost curatat!");
     }
 }

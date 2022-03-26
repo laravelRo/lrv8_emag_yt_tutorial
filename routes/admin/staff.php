@@ -26,6 +26,9 @@ Route::prefix('staff/cpanel')->middleware(['auth:staff'])->group(function () {
 Route::prefix('staff/cpanel/manager')->middleware(['auth:staff', 'manager'])->group(function () {
     Route::get('staff', [ManagerController::class, 'showStaff'])->name('show.staff');
 
+    //stergerea produselor expirate din Cart
+    Route::delete('/deleteCart', [ManagerController::class, 'deleteExpiredCart'])->name('delete.expired.cart');
+
     //adaugarea unui membru staff
     Route::get('staff/new', [ManagerController::class, 'newStaff'])->name('new.staff');
     Route::post('staff/new', [ManagerController::class, 'createStaff'])->name('create.staff');
@@ -44,6 +47,6 @@ Route::prefix('staff/cpanel/manager')->middleware(['auth:staff', 'manager'])->gr
     Route::put('/staff/restore/{id}', [ManagerController::class, 'restoreStaff'])->name('restore.staff');
 
     // stergerea definitiva a unui membru stafff
-     //blocarea unui membru staff
-     Route::delete('/staff/remove/{id}', [ManagerController::class, 'removeStaff'])->name('remove.staff');
+    //blocarea unui membru staff
+    Route::delete('/staff/remove/{id}', [ManagerController::class, 'removeStaff'])->name('remove.staff');
 });

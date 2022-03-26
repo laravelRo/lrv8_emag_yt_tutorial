@@ -10,6 +10,7 @@ class PersonalController extends Controller
     //ruta pentru afisarea Panoului de control al administratiei
     public function showControlPanel()
     {
+
         return view('admin.personal.cpanel');
     }
 }

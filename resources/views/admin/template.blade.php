@@ -19,8 +19,8 @@
     @include('admin.partials.scripts')
     @include('sweetalert::alert')
 
-    @livewireScripts
     @yield('customJs')
+    @livewireScripts
 </body>
 
 </html>

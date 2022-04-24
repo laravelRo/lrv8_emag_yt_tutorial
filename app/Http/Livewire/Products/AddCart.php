@@ -19,7 +19,7 @@ class AddCart extends Component
         // utilizatorul este logat
         //========================
         if (Auth::check()) {
-            $productCount = Product::where('user_id', Auth::id())
+            $productCount = Cart::where('user_id', Auth::id())
                 ->where('product_id', $this->product_id)
                 ->count();
             if ($productCount > 0) {

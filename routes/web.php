@@ -22,8 +22,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
+
 // rutele publice
 require __DIR__ . '/front/pages.php';
+// ================================
+
 //rutele pentru panoul de control al utilizatorilor
 require __DIR__ . '/front/user.php';
 

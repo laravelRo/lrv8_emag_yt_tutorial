@@ -44,6 +44,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    //relatia one-to-many user has many addresses
+    public function addresses()
+    {
+        return $this->hasMany(Address::class, 'user_id');
+    }
+
     /**
      * Send a password reset notification to the user.
      *

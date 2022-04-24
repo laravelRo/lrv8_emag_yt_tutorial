@@ -9,4 +9,5 @@ Route::get('/shop', [PagesController::class, 'shopPage'])->name('shop');
 Route::get('/product', [PagesController::class, 'productPage'])->name('product');
 Route::get('/contact', [PagesController::class, 'contactPage'])->name('contact');
 Route::get('/cart', [PagesController::class, 'cartPage'])->name('cart');
-Route::get('/check', [PagesController::class, 'checkPage'])->name('check');
+
+Route::get('/check', [PagesController::class, 'checkPage'])->middleware('verified')->name('check');

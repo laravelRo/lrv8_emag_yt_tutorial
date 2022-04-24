@@ -61,7 +61,7 @@ class Cart extends Model
     public static function countExpiredGuests()
     {
         $count = Cart::where('user_id', null)
-            ->where('created_at', '<=', Carbon::now()->subMinutes(3)->toDateTimeString())
+            ->where('created_at', '<=', Carbon::now()->subDays(3)->toDateTimeString())
             ->count();
         return $count;
     }

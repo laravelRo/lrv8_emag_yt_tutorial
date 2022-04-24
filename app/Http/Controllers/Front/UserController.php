@@ -6,7 +6,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Requests\AddressAddRequest;
+use App\Models\Address;
 
 class UserController extends Controller
 {
@@ -47,5 +50,62 @@ class UserController extends Controller
             ->persistent(true, false);
 
         return back();
+    }
+
+    public function showAddress()
+    {
+        $user = Auth::user();
+        return view('front.user.cpanel.address')
+            ->with('user', $user);
+    }
+
+    public function addAddress()
+    {
+        return view('front.user.cpanel.address-add');
+    }
+
+    public function createAddress(AddressAddRequest $request)
+    {
+        $address = new Address;
+
+        $address->user_id = Auth::id();
+
+        $address->name = $request->name;
+        $address->phone = $request->phone;
+        $address->city = $request->city;
+        $address->address = $request->address;
+        $address->observations = $request->observations;
+
+        $address->save();
+        Alert::success('Adresa creata', 'Noua adresa a fost salvata in baza de date')->persistent(true, false);
+
+        return redirect(route('address.show'));
+    }
+
+    public function editAddress($id)
+    {
+        $address = Address::findOrFail($id);
+        return view('front.user.cpanel.address-edit')->with('address', $address);
+    }
+
+    public function updateAddress(AddressAddRequest $request, $id)
+    {
+        $address = Address::findOrFail($id);
+
+        $address->name = $request->name;
+        $address->phone = $request->phone;
+        $address->city = $request->city;
+        $address->address = $request->address;
+        $address->observations = $request->observations;
+
+        $address->save();
+        Alert::success('Adresa actualizata', 'Datele noii adrese au fost actualizate cu succes!')->persistent(true, false);
+        return redirect(route('address.show'));
+    }
+
+    public function deleteAddress($id)
+    {
+        $address = Address::findOrfail($id)->delete();
+        return redirect()->back()->with('success', 'Adresa a fost stearsa din baza de date');
     }
 }

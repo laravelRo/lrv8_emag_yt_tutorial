@@ -19,7 +19,7 @@ class CreateCartsTable extends Migration
             $table->string('session_id')->nullable();
             $table->integer('user_id')->nullable();
             $table->integer('product_id');
-            $table->integer('qty')->default(0);
+            $table->integer('qty')->default(1);
             $table->timestamps();
         });
     }

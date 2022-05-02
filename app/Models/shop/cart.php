@@ -57,6 +57,13 @@ class Cart extends Model
         }
     }
 
+    //public function emty cart
+    public static function emtyCart()
+    {
+        $result = Cart::where('user_id', Auth::id())->delete();
+        return $result;
+    }
+
     //functia care intoarce numarul de produse expirate ale guest
     public static function countExpiredGuests()
     {

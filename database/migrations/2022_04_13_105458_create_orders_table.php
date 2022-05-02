@@ -17,7 +17,11 @@ class CreateOrdersTable extends Migration
             $table->id();
 
             $table->foreignId('user_id')->constrained('users');
-            $table->unsignedBigInteger('address_id');
+
+            $table->string('name', 150);
+            $table->string('city', 70);
+            $table->string('address');
+            $table->string('phone', 150)->nullable();
 
             $table->datetime('approved_at')->nullable();
             $table->datetime('payed_at')->nullable();

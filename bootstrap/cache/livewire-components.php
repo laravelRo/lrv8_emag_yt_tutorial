@@ -8,5 +8,6 @@
   'products.add-cart' => 'App\\Http\\Livewire\\Products\\AddCart',
   'products.cart-item' => 'App\\Http\\Livewire\\Products\\CartItem',
   'products.cart-products' => 'App\\Http\\Livewire\\Products\\CartProducts',
+  'products.check' => 'App\\Http\\Livewire\\Products\\Check',
   'products.count-cart' => 'App\\Http\\Livewire\\Products\\CountCart',
 );

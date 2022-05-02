@@ -15,4 +15,9 @@ class Order extends Model
         'recivied_at' => 'datetime',
 
     ];
+
+    public function order_items()
+    {
+        return $this->hasMany(OrderItem::class, 'order_id');
+    }
 }

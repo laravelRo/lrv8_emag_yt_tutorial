@@ -46,6 +46,7 @@ class Check extends Component
 
         $order->save();
 
+        //transferam produsele din cos in comanda - order_items
         foreach (Cart::cartProducts() as $product) {
             $item = new OrderItem;
 
@@ -58,8 +59,12 @@ class Check extends Component
 
             $item->save();
         }
+
+        //golim cosul cu produse
         Cart::emtyCart();
-        Alert::success('Comanda a fost plasata', 'Comanda Dvs a fost inregistrata in baza de date. Veti primi in scurt timp un mesaj cu informatii suplimentare')->persistent(true, false);
+
+        Alert::success('Comanda a fost plasata', 'Comanda Dvs a fost inregistrata in baza de date.
+        Veti primi in scurt timp un mesaj cu informatii suplimentare')->persistent(true, false);
 
         return redirect()->route('home');
     }

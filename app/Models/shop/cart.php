@@ -57,7 +57,7 @@ class Cart extends Model
         }
     }
 
-    //public function emty cart
+    //public function emty cart - golim cosul de cumparaturi
     public static function emtyCart()
     {
         $result = Cart::where('user_id', Auth::id())->delete();

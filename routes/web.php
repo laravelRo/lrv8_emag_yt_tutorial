@@ -57,5 +57,8 @@ require __DIR__ . '/admin/content/products.php';
 //rutele frontend pentru continut
 // ========================
 
-//rutele pentru sectiuni
+//rutele publice pentru sectiuni, categorii si produse
 require __DIR__ . '/front/content/products.php';
+
+//rutele pentru comenzile utilizatorilor
+require __DIR__ . '/front/content/orders.php';

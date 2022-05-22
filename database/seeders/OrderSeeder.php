@@ -21,6 +21,11 @@ class OrderSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
+        // initializarea tabelelor
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
+        OrderItem::truncate();
+        Order::truncate();
+
         //trebuie sa gasim utilizatorii care au emailul verificat si cel putin o adresa
         $users = User::withCount('addresses')
             ->whereNotNull('email_verified_at')

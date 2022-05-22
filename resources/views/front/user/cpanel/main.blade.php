@@ -21,7 +21,11 @@
                             <li class="list-group-item"><a href="{{ route('address.show') }}">
                                     <i class="fas fa-address-book"></i> Adrese livrare /
                                     facturare</a></li>
-                            <li class="list-group-item">Istoric comenzi</li>
+                            <li class="list-group-item">
+
+                                <a href="{{ route('account.orders.list') }}"> <i class="fas fa-shopping-bag"></i> Istoric
+                                    comenzi</a>
+                            </li>
                             <li class="list-group-item">Mesaje / sesizari admin</li>
                             <li class="list-group-item">Oferte speciale</li>
                             <li class="list-group-item"> <a href="{{ route('reset-pass') }}">Schimbare parola</a></li>

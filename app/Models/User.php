@@ -50,6 +50,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Address::class, 'user_id');
     }
 
+    //relatia one-to-many user - orders
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'user_id');
+    }
+
     /**
      * Send a password reset notification to the user.
      *

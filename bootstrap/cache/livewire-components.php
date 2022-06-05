@@ -1,6 +1,7 @@
 <?php return array (
   'admin.admin-products' => 'App\\Http\\Livewire\\Admin\\AdminProducts',
   'admin.edit-photo' => 'App\\Http\\Livewire\\Admin\\EditPhoto',
+  'admin.order-items' => 'App\\Http\\Livewire\\Admin\\OrderItems',
   'admin.photos-upload' => 'App\\Http\\Livewire\\Admin\\PhotosUpload',
   'admin.product-photo' => 'App\\Http\\Livewire\\Admin\\ProductPhoto',
   'admin.sections-status' => 'App\\Http\\Livewire\\Admin\\SectionsStatus',

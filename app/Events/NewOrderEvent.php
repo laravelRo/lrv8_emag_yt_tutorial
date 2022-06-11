@@ -17,14 +17,16 @@ class NewOrderEvent
 
 
     public $order;
+    public $alert;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct(Order $order, $alert)
     {
         $this->order = $order;
+        $this->alert = $alert;
     }
 }

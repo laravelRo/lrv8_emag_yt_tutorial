@@ -71,9 +71,8 @@ class Check extends Component
 
 
         //trimitem un email de confirmare utilizatorului
-        NewOrderEvent::dispatch($order);
-
-
+        $alert = "Comanda a fost inregistrata in baza de date. <br> Imediat ce va fi aprobata veti primi un email de confirmare.";
+        NewOrderEvent::dispatch($order, $alert);
 
         //actualizam stocurile pentru produse
 

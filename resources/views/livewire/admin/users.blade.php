@@ -68,7 +68,9 @@
                                     {{ $users->currentPage() > 1 ? $loop->iteration + $users->perPage() * ($users->currentPage() - 1) : $loop->iteration }}
                                 </td>
                                 <td>
-                                    {{ $user->name }}
+                                    <a href="{{ route('admin.orders.list', ['user_id' => $user->id]) }}">
+                                        {{ $user->name }}
+                                    </a>
                                 </td>
                                 <td>
                                     {{ $user->email }}
@@ -95,7 +97,6 @@
                                                 <i class="fas fa-at fa-2x"></i>
                                             </button>
                                         @endif
-
                                     @endif
                                 </td>
                                 <td class="d-flex justify-content-between">

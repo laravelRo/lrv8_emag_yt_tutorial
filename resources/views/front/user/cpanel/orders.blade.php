@@ -21,6 +21,20 @@
                         <i class="fas fa-address-book"></i> {{ $order->address }}, <i class="fas fa-city"></i>
                         {{ $order->city }}, <i class="fas fa-mobile"></i> {{ $order->phone }}
                     </p>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">Pending</li>
+                            @if ($order->approved_at)
+                                <li class="breadcrumb-item text-info " aria-current="page">Approved</li>
+                            @endif
+                            @if ($order->payed_at)
+                                <li class="breadcrumb-item text-info " aria-current="page">Payed</li>
+                            @endif
+                            @if ($order->recivied_at)
+                                <li class="breadcrumb-item text-info " aria-current="page">Recivied</li>
+                            @endif
+                        </ol>
+                    </nav>
 
                     <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
                         data-target="#items{{ $order->id }}" aria-expanded="true" aria-controls="collapseOne">

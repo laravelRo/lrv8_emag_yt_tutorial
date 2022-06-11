@@ -1,12 +1,13 @@
 <div>
     <h3>{{ $products->total() }} Products -
-        @if (isset($section_title)) <span
-                class="text-primary">{{ $section_title }}</span>
-        @else all sections
+        @if (isset($section_title))
+            <span class="text-primary">{{ $section_title }}</span>
+        @else
+            all sections
         @endif
 
-        @if (isset($category_title)) <span
-                class="text-success">{{ $category_title }}</span>
+        @if (isset($category_title))
+            <span class="text-success">{{ $category_title }}</span>
         @endif
         <a href="{{ route('products.new') }}" class="btn btn-primary float-end"><i class="fas fa-plus"></i>&nbsp;New
             Product</a>
@@ -29,7 +30,7 @@
     <div class="row bg-warning py-2 mb-4">
         <div class="col-md-4">
             Sections<br>
-            @forelse ($sections as $section )
+            @forelse ($sections as $section)
                 <span wire:click="selectSection({{ $section->id }})"
                     class="badge mr-3
                     {{ $selected_section == $section->id ? 'bg-primary' : 'bg-secondary' }}"
@@ -87,19 +88,18 @@
             @forelse ($products as $product )
                 <tr>
                     <td>
-                        {{ $products->currentPage() > 1? $loop->iteration + $products->perPage() * ($products->currentPage() - 1): $loop->iteration }}
+                        {{ $products->currentPage() > 1 ? $loop->iteration + $products->perPage() * ($products->currentPage() - 1) : $loop->iteration }}
                     </td>
                     <td width="350">
-                        {{ $product->name }} - <span class="text-warning">{{ $product->brand->name }}</span>
+                        {{ $product->name }} (<span class="text-danger">{{ $product->id }})</span> - <span
+                            class="text-warning">{{ $product->brand->name }}</span>
                         <br>
                         <span wire:click="selectSection({{ $product->section->id }})" class="badge bg-primary"
                             style="cursor: pointer;"
                             id="section-{{ $section->id }} }}">{{ $product->section->name }}</span>
                     </td>
                     <td class="text-center">
-                        @livewire('admin.product-photo',['model'=>$product, 'default_image'=>'product.jpg',
-                        'folder'=>'products'],
-                        key(time().'img'.$product->id))
+                        @livewire('admin.product-photo', ['model' => $product, 'default_image' => 'product.jpg', 'folder' => 'products'], key(time() . 'img' . $product->id))
                         {{-- <img src="{{ $product->photoUrl() }}" width="60" alt=""> --}}
                     </td>
                     <td class="text-center" width="150">{{ $product->price }} <br> <span
@@ -118,7 +118,7 @@
                     </td>
 
                     <td wire:ignore.self width="200">
-                        @livewire('admin.sections-status',['model'=>$product], key(time().'ap'.$product->id))
+                        @livewire('admin.sections-status', ['model' => $product], key(time() . 'ap' . $product->id))
                     </td>
                     <td width="150">
                         <a title="Editeaza produs {{ $product->name }}"

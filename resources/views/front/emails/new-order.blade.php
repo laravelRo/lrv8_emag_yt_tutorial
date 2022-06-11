@@ -56,17 +56,25 @@
     table td {
         padding: 5px;
     }
-
 </style>
 
 <div class="container">
     <h1>
-        Email de confirmare a comenzii
+        Comanda cu numarul {{ $order->id }} din {{ $order->created_at->format('d-M Y') }}
     </h1>
     <p>
-        Comanda cu numarul {{ $order->id }} din {{ $order->created_at->format('d-M Y') }} a fost inregistrata cu
-        succes pe EShop. <br>
-        Dupa ce va fi aprobata veti primi un email cu date suplimentare.
+        Statul comenzii: <b>
+            @if ($order->approved_at)
+                Comanda verificata si aprobata
+            @endif
+        </b> - <b>
+            @if ($order->payed_at)
+                Plata inregistrata
+            @endif
+        </b>
+    </p>
+    <p>
+        {!! $alert !!}
     </p>
     <p>
         Datele comenzii sunt urmatoarele:<br>

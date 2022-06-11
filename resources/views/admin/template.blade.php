@@ -17,10 +17,10 @@
 
     {{-- ==== scripturi si livewire --}}
     @include('admin.partials.scripts')
-    @include('sweetalert::alert')
 
     @yield('customJs')
     @livewireScripts
+    @include('sweetalert::alert')
 </body>
 
 </html>

@@ -13,15 +13,17 @@ class NewOrderMail extends Mailable
     use Queueable, SerializesModels;
 
     public $order;
+    public $alert;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct($order, $alert)
     {
         $this->order = $order;
+        $this->alert = $alert;
     }
 
     /**
@@ -34,7 +36,7 @@ class NewOrderMail extends Mailable
 
 
         return $this->from('Eshop@admin.com', 'Administrator Eshop')
-            ->subject('Comanda a fost inregistrata')
+            ->subject('Comanda ' . $this->order->id . ' de la E-Shop')
             ->view('front.emails.new-order');
     }
 }

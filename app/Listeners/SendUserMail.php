@@ -30,7 +30,8 @@ class SendUserMail
     {
 
         //trimitem mailul de confirmare utilizatorului
+        // dump("ok");
         Mail::to($event->order->user->email)
-            ->send(new NewOrderMail($event->order));
+            ->send(new NewOrderMail($event->order, $event->alert));
     }
 }

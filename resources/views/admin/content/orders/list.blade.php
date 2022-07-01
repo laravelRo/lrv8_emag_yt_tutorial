@@ -30,6 +30,7 @@
                             <th>Address</th>
 
                             <th>Details</th>
+                            <th>Coupon</th>
                             <th>Status</th>
 
                             <th>
@@ -43,6 +44,7 @@
                             <th>Address</th>
 
                             <th>Details</th>
+                            <th>Coupon</th>
                             <th>Status</th>
 
                             <th>
@@ -66,6 +68,14 @@
                                     <b>Total Cost: </b>{{ number_format($order->totalCost(), '2', ',', '.') }}<br>
                                     <b>Product Number:: </b>{{ $order->order_items->count() }}
 
+                                </td>
+                                <td>
+                                    @if ($order->discount)
+                                        {{ $order->discount->coupon_code }} - <span
+                                            class="text-success">{{ $order->discount->discount }}</span>
+                                    @else
+                                        No Coupon
+                                    @endif
                                 </td>
                                 <td>
                                     @if (!$order->approved_at)

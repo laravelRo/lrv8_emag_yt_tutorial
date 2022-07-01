@@ -9,11 +9,22 @@
                     <h4 class="mb-0">
                         <span class="text-info">{{ $order->name }}
                             {{ $order->created_at->format('d-M Y') }}</span>
-                        total: {{ number_format($order->totalCost(), '2', ',', '.') }} <span class="text-muted"
-                            style="font-size: 0.7em;">(transport:
-                            {{ $order->shipping_cost }})</span>
+
+                        total: {{ number_format($order->totalCost(), '2', ',', '.') }}
+
+                        <span class="text-muted" style="font-size: 0.7em;">
+                            (transport: {{ $order->shipping_cost }})
+                        </span>
 
                     </h4>
+                    @if ($order->discount)
+                        <p>
+                            Coupon: <b>{{ $order->discount->coupon_code }}</b>
+                            - discount: <span class="text-success">{{ $order->discount->discount }}</span>
+                            <b>Total plata: <span
+                                    class="text-info">{{ number_format($order->totalCost() - $order->discount->discount, '2', ',', '.') }}</span></b>
+                        </p>
+                    @endif
                     <p>
                         <a href="{{ route('account.orders.pdf', $order->id) }}" target="_blank"
                             class="alert-link text-info float-right"><i class="fas fa-print"></i>

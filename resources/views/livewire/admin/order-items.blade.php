@@ -2,9 +2,17 @@
      <div class="card-header bg-light">
          <h4>Order details: {{ $order->order_items->count() }} products <b>Total
                  cost:</b> {{ number_format($order->totalCost(), '2', ',', '.') }} &nbsp;
+             @if ($order->discount)
+                 Total plata:{{ number_format($order->totalCost() - $order->discount->discount, '2', ',', '.') }}
+             @endif
              Name: <span class="text-primary">{{ $order->user->name }}</span> <span
                  class="text-danger">{{ $order->user->id }}</span>
          </h4>
+         @if ($order->discount)
+             Coupon: {{ $order->discount->coupon_code }} - <span
+                 class="text-success">{{ $order->discount->discount }}</span><br>
+             {{ $order->discount->coupon_description }}
+         @endif
      </div>
 
      <div class="card-body">

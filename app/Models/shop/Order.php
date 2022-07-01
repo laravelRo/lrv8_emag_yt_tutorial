@@ -42,4 +42,10 @@ class Order extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    //relatia one-to-one cu discount-ul
+    public function discount()
+    {
+        return $this->hasOne(OrderDiscount::class, 'order_id');
+    }
 }

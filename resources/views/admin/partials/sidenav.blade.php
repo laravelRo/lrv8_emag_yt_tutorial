@@ -35,6 +35,11 @@
                 <div class="sb-nav-link-icon"><i class="fab fa-shopify"></i></div>
                 Orders
             </a>
+            {{-- linkul catre pagina principala de comenzi --}}
+            <a class="nav-link" href="{{ route('admin.coupons.list') }}">
+                <div class="sb-nav-link-icon"><i class="fab fa-shopify"></i></div>
+                Coupons
+            </a>
 
 
 

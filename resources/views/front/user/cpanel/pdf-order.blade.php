@@ -20,12 +20,18 @@
     table td {
         padding: 5px;
     }
-
 </style>
 
 <h1>Comanda din data {{ $order->created_at->format('d M Y') }} cu nr {{ $order->id }}</h1>
 
 <h2>Cost total inclusiv transport: {{ number_format($order->totalCost(), '2', ',', '.') }}</h2>
+@if ($order->discount)
+    <p>
+        Cod coupon: {{ $order->discount->coupon_code }} - discount: <b>{{ $order->discount->discount }}</b><br>
+        {{ $order->discount->coupon_description }}
+    </p>
+    <h2>Total plata: {{ number_format($order->totalCost() - $order->discount->discount, '2', ',', '.') }}</h2>
+@endif
 
 <table>
     <thead>

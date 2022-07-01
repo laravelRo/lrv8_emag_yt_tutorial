@@ -86,11 +86,6 @@
                                  <td></td>
                                  <td></td>
                                  <td class="text-right">
-                                     <h5>Cost produse: {{ number_format(Cart::totalCart(), '2', ',', '.') }}</h5>
-                                     <h5>Transport: 50</h5>
-                                     <hr>
-                                     <h4>Total plata: {{ number_format(Cart::totalCart() + 50, '2', ',', '.') }}
-                                     </h4>
 
                                  </td>
 
@@ -100,6 +95,22 @@
 
 
                      </table>
+                     <div class="text-right">
+                         <h5>Cost produse: {{ number_format(Cart::totalCart(), '2', ',', '.') }}</h5>
+                         @if (session()->get('coupon_active'))
+                             <h5 class="text-info">
+                                 {{ session()->get('coupon_active')['description'] }}:
+                                 {{ Cart::cartDiscount() }}
+                             </h5>
+                         @endif
+                         <h5>Transport: 50</h5>
+                         <hr>
+                         <h4>
+                             Total plata:
+                             {{ number_format(Cart::totalCart() + 50 - Cart::cartDiscount(), '2', ',', '.') }}
+                         </h4>
+
+                     </div>
                  </div>
 
              </div>

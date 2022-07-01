@@ -47,6 +47,25 @@ class Cart extends Model
         return $total;
     }
 
+    //functia statica care calculeaza discount-ul
+    public static function cartDiscount()
+    {
+
+        if (Session::get('coupon_active')) {
+            $coupon_active = Session::get('coupon_active');
+            if ($coupon_active['percent']) {
+                return Cart::totalCart() * $coupon_active['value'] / 100;
+            } else {
+                return $coupon_active['value'];
+            }
+        } else {
+            return 0;
+        }
+    }
+
+
+
+
     //functia statica pentru actualizarea cosului la logarea unui utilizator
     public static function updateUserCart()
     {

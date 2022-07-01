@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\shop\Cart;
 use App\Models\shop\Order;
 use App\Events\NewOrderEvent;
+use App\Models\shop\OrderDiscount;
 use App\Models\shop\OrderItem;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -63,6 +64,33 @@ class Check extends Component
 
 
             $item->save();
+        }
+
+        //salvam discount-ul
+        if (session()->get('coupon_active')) {
+            $coupon = session()->get('coupon_active');
+
+
+            //query builder
+            // $order->discount()->create([
+            //     'coupon_code' => $coupon['code'],
+            //     'coupon_description' => $coupon['description'],
+            //     'discount' => Cart::cartDiscount()
+            // ]);
+
+            //eloquent
+            $discount = new OrderDiscount;
+
+            $discount->order_id = $order->id;
+            $discount->coupon_code = $coupon['code'];
+            $discount->coupon_description = $coupon['description'];
+            $discount->discount = Cart::cartDiscount();
+
+            $discount->save();
+
+
+
+            session()->forget('coupon_active');
         }
 
         //golim cosul cu produse

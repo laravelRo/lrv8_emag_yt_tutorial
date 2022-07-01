@@ -1,5 +1,6 @@
 <?php return array (
   'admin.admin-products' => 'App\\Http\\Livewire\\Admin\\AdminProducts',
+  'admin.coupons' => 'App\\Http\\Livewire\\Admin\\Coupons',
   'admin.edit-photo' => 'App\\Http\\Livewire\\Admin\\EditPhoto',
   'admin.item' => 'App\\Http\\Livewire\\Admin\\Item',
   'admin.order-items' => 'App\\Http\\Livewire\\Admin\\OrderItems',

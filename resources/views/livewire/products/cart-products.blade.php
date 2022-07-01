@@ -10,14 +10,25 @@
          {{-- sumarul costurilor pentru cos --}}
          @if ($totalCart > 0)
              <div class="col-lg-4">
-                 <form class="mb-5" action="">
-                     <div class="input-group">
-                         <input type="text" class="form-control p-4" placeholder="Coupon Code">
-                         <div class="input-group-append">
-                             <button class="btn btn-primary">Apply Coupon</button>
-                         </div>
-                     </div>
-                 </form>
+                 @auth
+                     @if (!session()->get('coupon_active'))
+                         <form wire:submit.prevent="applyCode" class="mb-5" action="">
+                             <div class="input-group">
+                                 <input wire:model="code" type="text" class="form-control p-4" placeholder="Coupon Code">
+
+                                 <div class="input-group-append">
+                                     <button class="btn btn-primary">Apply Coupon</button>
+                                 </div>
+                             </div>
+                             @error('code')
+                                 <span class="text-danger">{{ $message }}</span>
+                             @enderror
+                             @if ($user_message)
+                                 <span class="text-danger">{{ $user_message }}</span>
+                             @endif
+                         </form>
+                     @endif
+                 @endauth
                  {{-- end cupon --}}
 
                  <div class="card border-secondary mb-5">
@@ -34,11 +45,21 @@
                              <h6 class="font-weight-medium">Shipping</h6>
                              <h6 class="font-weight-medium">50</h6>
                          </div>
+                         @if (Session::get('coupon_active'))
+                             <div class="d-flex justify-content-between my-2">
+                                 <h6 class="font-weight-medium">{{ Session::get('coupon_active')['description'] }}
+                                     &nbsp; <button wire:click="removeCoupon" class="btn btn-danger btn-sm"
+                                         title="Sterge couponul activ"><i class="fas fa-trash"></i></button>
+                                 </h6>
+                                 <h6 class="font-weight-medium text-info">{{ $discount }}
+                                 </h6>
+                             </div>
+                         @endif
                      </div>
                      <div class="card-footer border-secondary bg-transparent">
                          <div class="d-flex justify-content-between mt-2">
                              <h5 class="font-weight-bold">Total</h5>
-                             <h5 class="font-weight-bold">{{ $totalCart + 50 }}</h5>
+                             <h5 class="font-weight-bold">{{ $totalCart + 50 - $discount }} </h5>
                          </div>
 
                          @auth

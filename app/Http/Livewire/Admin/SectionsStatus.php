@@ -10,6 +10,8 @@ class SectionsStatus extends Component
 
     // public $section;
 
+    public $show_standard = true;
+
 
 
 

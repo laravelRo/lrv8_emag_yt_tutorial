@@ -14,7 +14,7 @@ class OrdersController extends Controller
     //listam comenzile pentru un utiizator
     public function listOrders()
     {
-        $orders = Order::with(['order_items'])
+        $orders = Order::with(['order_items', 'discount'])
             ->where('user_id', Auth::id())
             ->orderByDesc('created_at')
             ->paginate(10);

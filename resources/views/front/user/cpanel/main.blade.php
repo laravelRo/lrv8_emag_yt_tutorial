@@ -27,7 +27,9 @@
                                     comenzi</a>
                             </li>
                             <li class="list-group-item">Mesaje / sesizari admin</li>
-                            <li class="list-group-item">Oferte speciale</li>
+                            <li class="list-group-item">
+                                <a href="{{ route('user.coupons') }}"> Coupoane active</a>
+                            </li>
                             <li class="list-group-item"> <a href="{{ route('reset-pass') }}">Schimbare parola</a></li>
                         </ul>
                     </div>

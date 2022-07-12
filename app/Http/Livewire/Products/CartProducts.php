@@ -65,6 +65,17 @@ class CartProducts extends Component
             return;
         }
 
+        //verificam ca apartine utilizatorului curent
+        if ($coupon->coupon_type == 3) {
+            $coupon_users = $coupon->users;
+            $actual_user = $coupon_users->where('id', auth()->id())->first();
+            if (!$actual_user) {
+                $this->user_message = "Nu puteti utiliza acest coupon!";
+                $this->code = null;
+                return;
+            }
+        }
+
 
 
         session()->put('coupon_active', [

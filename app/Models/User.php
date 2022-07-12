@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\shop\Coupon;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Notifications\ResetPasswordNotification;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -54,6 +55,21 @@ class User extends Authenticatable implements MustVerifyEmail
     public function orders()
     {
         return $this->hasMany(Order::class, 'user_id');
+    }
+
+
+    //relatia polimorfica many-to-many coupoane
+    public function coupons()
+    {
+        return $this->morphToMany(Coupon::class, 'couponable');
+    }
+
+    public function couponsActive()
+    {
+        return $this->morphToMany(Coupon::class, 'couponable')
+            ->where('active', true)
+            ->where('expired_at', '>', now())
+            ->get();
     }
 
     /**

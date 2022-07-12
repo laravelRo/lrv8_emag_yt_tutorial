@@ -6,9 +6,10 @@ use App\Models\Address;
 use Livewire\Component;
 use App\Models\shop\Cart;
 use App\Models\shop\Order;
+use App\Models\shop\Coupon;
 use App\Events\NewOrderEvent;
-use App\Models\shop\OrderDiscount;
 use App\Models\shop\OrderItem;
+use App\Models\shop\OrderDiscount;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -89,6 +90,11 @@ class Check extends Component
             $discount->save();
 
 
+            //detasam couponul de utilizator daca este de tip utilizator
+            if ($coupon['coupon_type'] == 3) {
+                $coupon_db = Coupon::where('code', $coupon['code'])->first();
+                $coupon_db->users()->detach(auth()->id());
+            }
 
             session()->forget('coupon_active');
         }

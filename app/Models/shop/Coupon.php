@@ -2,8 +2,9 @@
 
 namespace App\Models\shop;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Coupon extends Model
 {
@@ -12,4 +13,10 @@ class Coupon extends Model
     protected $casts = [
         'expired_at' => 'datetime',
     ];
+
+    //relatia inversa many-to-many polimorfica cu utilizatorii
+    public function users()
+    {
+        return $this->morphedByMany(User::class, 'couponable');
+    }
 }

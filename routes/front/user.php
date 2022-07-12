@@ -38,4 +38,9 @@ Route::prefix('user/cpanel')->middleware(['verified', 'auth'])->group(function (
 
     //ruta pentru stergerea unei adrese
     Route::delete('address/delete/{id}', [UserController::class, 'deleteAddress'])->name('address.delete');
+
+    //========================
+    //rutele pentru afisarea coupoanelor
+    //========================
+    Route::get('coupons', [UserController::class, 'showCoupons'])->name('user.coupons');
 });

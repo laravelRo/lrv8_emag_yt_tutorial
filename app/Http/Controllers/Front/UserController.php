@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Front;
 
 use App\Models\User;
+use App\Models\Address;
+use App\Models\shop\Coupon;
 use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\AddressAddRequest;
-use App\Models\Address;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -107,5 +108,23 @@ class UserController extends Controller
     {
         $address = Address::findOrfail($id)->delete();
         return redirect()->back()->with('success', 'Adresa a fost stearsa din baza de date');
+    }
+
+    //==============
+    // coupoane
+    //==============
+
+    public function showCoupons()
+    {
+        $coupons_gen = Coupon::where('active', true)
+            ->where('expired_at', '>', now())
+            ->where('coupon_type', 1)
+            ->get();
+
+        $vouchers = auth()->user()->couponsActive();
+
+        return view('front.user.cpanel.coupons')
+            ->with('coupons_gen', $coupons_gen)
+            ->with('vouchers', $vouchers);
     }
 }

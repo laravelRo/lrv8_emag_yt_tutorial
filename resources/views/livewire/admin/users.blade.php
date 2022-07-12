@@ -69,7 +69,7 @@
                                 </td>
                                 <td>
                                     <a href="{{ route('admin.orders.list', ['user_id' => $user->id]) }}">
-                                        {{ $user->name }}
+                                        {{ $user->name }}(<span class="text-danger">{{ $user->id }}</span>)
                                     </a>
                                 </td>
                                 <td>

@@ -18,9 +18,9 @@
     {{-- ==== scripturi si livewire --}}
     @include('admin.partials.scripts')
 
-    @yield('customJs')
     @livewireScripts
     @include('sweetalert::alert')
+    @yield('customJs')
 </body>
 
 </html>

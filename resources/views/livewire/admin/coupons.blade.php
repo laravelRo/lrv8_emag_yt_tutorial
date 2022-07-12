@@ -46,13 +46,21 @@
                             <td>{{ $coupon->amount }}</td>
                             <td>{{ $coupon->expired_at->format('d-M Y') }}</td>
                             <td style="width: 220px;">
-                                @livewire('admin.sections-status', ['model' => $coupon, 'show_standard' => false])
+                                @livewire('admin.sections-status', ['model' => $coupon, 'show_standard' => false], key(time() . $coupon->id))
                             </td>
                             <td>
                                 <a href="{{ route('admin.coupons.edit', $coupon->id) }}"
                                     class="btn btn-circle btn-sm btn-success">
                                     <i class="far fa-edit fa-2x"></i>
                                 </a>
+
+                                @if ($coupon->coupon_type == 3)
+                                    <button id="{{ time() }}_user_{{ $coupon->id }}" wire:ignore
+                                        wire:click="openModalCoupons('{{ $coupon->id }}')"
+                                        class="btn btn-circle btn-sm btn-primary">
+                                        <i class="fas fa-user-plus fa-2x"></i>
+                                    </button>
+                                @endif
                             </td>
                         </tr>
                     @empty
@@ -66,5 +74,8 @@
             <div>{{ $coupons->links() }}</div>
 
         </div>
+        @include('admin.content.coupons.modal-user-coupons')
+
     </div>
+
 </main>

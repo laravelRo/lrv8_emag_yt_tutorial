@@ -51,7 +51,7 @@ class CartProducts extends Component
             return;
         }
         //verificam daca couponul este actual (nu a expirat)
-        if ($coupon->expired_at < now()) {
+        if ($coupon->expired_at <= now()) {
             $this->user_message = "Couponul pentru acest cod a expirat!";
             $this->code = null;
             return;

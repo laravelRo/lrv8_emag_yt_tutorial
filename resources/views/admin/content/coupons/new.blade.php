@@ -35,10 +35,11 @@
                                 type</label>
 
                             <select class="form-select" name="coupon_type">
-                                <option selected>Open this select menu</option>
+                                <option selected>Select coupon type</option>
                                 <option value="1">General</option>
                                 <option value="2">Categories</option>
                                 <option value="3">Users</option>
+                                <option value="4">Brands</option>
                             </select>
 
                             @error('coupon_type')

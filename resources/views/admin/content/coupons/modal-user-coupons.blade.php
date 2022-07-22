@@ -1,9 +1,9 @@
 <div class="modal fade" data-bs-backdrop="static" tabindex="-1" id="modalCouponsUser" wire:ignore.self>
     <div class="modal-dialog">
         <div class="modal-content">
-            @if ($coupon_active)
+            @if ($coupon_user_active)
                 <div class="modal-header">
-                    <h5 class="modal-title">Aplicarea couponului {{ $coupon_active->code }}</h5>
+                    <h5 class="modal-title">Aplicarea couponului {{ $coupon_user_active->code }}</h5>
                     <button wire:click="resetUserModal" type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
@@ -21,7 +21,7 @@
                         <p class="text-danger">{{ $error_message }}</p>
                     @endif
 
-                    @forelse($coupon_active->users()->get() as $user)
+                    @forelse($coupon_users as $user)
                         <button class="btn btn-success btn-sm m-2">
                             {{ $user->name }} <span wire:click="detachUser('{{ $user->id }}')"
                                 class="badge bg-danger">X</span>

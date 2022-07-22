@@ -61,6 +61,13 @@
                                         <i class="fas fa-user-plus fa-2x"></i>
                                     </button>
                                 @endif
+                                @if ($coupon->coupon_type == 4)
+                                    <button id="{{ time() }}_user_{{ $coupon->id }}" wire:ignore
+                                        wire:click="openModalBrand('{{ $coupon->id }}')"
+                                        class="btn btn-circle btn-sm btn-warning">
+                                        <i class="fab fa-buffer fa-2x"></i>
+                                    </button>
+                                @endif
                             </td>
                         </tr>
                     @empty
@@ -75,6 +82,7 @@
 
         </div>
         @include('admin.content.coupons.modal-user-coupons')
+        @include('admin.content.coupons.modal-brands-coupon')
 
     </div>
 

@@ -5,16 +5,25 @@ namespace App\Http\Livewire\Admin;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\shop\Coupon;
+use App\Models\content\Brand;
 use Illuminate\Support\Facades\DB;
 
 class Coupons extends Component
 {
 
+    public $coupon_user_active;
+    public $coupon_users;
     public $user_id;
     public $error_message;
-    public $coupon_active;
 
+    public $coupon_brand_active;
+    public $brands_free;
+    public $brands_coupon;
+
+    // ====================
     //atasarea couponul unui utilizator
+    // ====================
+
     public function atachUser()
     {
         $this->validate([
@@ -30,14 +39,17 @@ class Coupons extends Component
         }
 
 
-        $this->coupon_active->users()->attach($this->user_id);
+        $this->coupon_user_active->users()->attach($this->user_id);
+        $this->coupon_users = $this->coupon_user_active->users()->orderBy('name')->get();
+
         $this->user_id = null;
     }
 
     public function detachUser($id)
     {
 
-        $this->coupon_active->users()->detach($id);
+        $this->coupon_user_active->users()->detach($id);
+        $this->coupon_users = $this->coupon_user_active->users()->orderBy('name')->get();
         $this->user_id = null;
     }
 
@@ -45,7 +57,9 @@ class Coupons extends Component
     public function openModalCoupons($id)
     {
 
-        $this->coupon_active = Coupon::findOrFail($id);
+        $this->coupon_user_active = Coupon::findOrFail($id);
+        $this->coupon_users = $this->coupon_user_active->users()->orderBy('name')->get();
+
         $this->dispatchBrowserEvent('openCouponsModal');
     }
 
@@ -55,6 +69,73 @@ class Coupons extends Component
         $this->error_message = null;
         $this->coupon_active = null;
     }
+
+    // <<< END=================
+    //atasarea couponul unui utilizator
+    // ====================
+
+    // ===========================
+
+    // =========================
+    // ATASAREA BRANDURILOR LA UN COUPON
+    // =========================
+
+    public function openModalBrand($id)
+    {
+        $this->coupon_brand_active = Coupon::findOrFail($id);
+
+        //obtin brandurile care nu sunt atasate de coupon
+        $this->getFreeBrands();
+
+        //declansez butonul pentru afisarea ferestrei modale
+        $this->dispatchBrowserEvent('openBrandsModal');
+    }
+
+    //obtin brandurile care nu sunt atasate de couponul activ
+    public function getFreeBrands()
+    {
+        //obtin toate brandurile active
+        $brands = Brand::select('id', 'name')
+            ->where('active', true)
+            ->orderBy('name')
+            ->get();
+
+        //obtin toate bbrandurile atasate couponului in ordine alfabetica
+        $this->brands_coupon = $this->coupon_brand_active->brands()
+            ->orderBy('name')
+            ->get();
+
+        // obtin diferenta intre toate brandurile si brandurile atasate couponului
+        $this->brands_free = $brands->diff($this->brands_coupon);
+    }
+
+    public function addBrandToCoupon($id)
+    {
+        $this->coupon_brand_active->brands()->attach($id);
+        //obtin brandurile care nu sunt atasate de coupon
+        $this->getFreeBrands();
+    }
+
+    public function detachBrand($id)
+    {
+        $this->coupon_brand_active->brands()->detach($id);
+        //obtin brandurile care nu sunt atasate de coupon
+        $this->getFreeBrands();
+    }
+
+    public function resetBrandsModal()
+    {
+        $this->coupon_brand_active = null;
+        $this->brands_free = null;
+        $this->brands_coupon = null;
+    }
+
+    // <<<<<< END=====================
+    // ATASAREA BRANDURILOR LA UN COUPON
+    // =========================
+
+
+
 
     public function render()
     {

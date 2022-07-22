@@ -2,8 +2,9 @@
 
 namespace App\Models\content;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\shop\Coupon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Brand extends Model
 {
@@ -48,5 +49,11 @@ class Brand extends Model
     public function galleryUrl()
     {
         return '/photos/brands/' . $this->id . '/';
+    }
+
+    //relatia polimorfica many-to-many coupoane
+    public function coupons()
+    {
+        return $this->morphToMany(Coupon::class, 'couponable');
     }
 }

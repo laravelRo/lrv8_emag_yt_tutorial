@@ -30,7 +30,23 @@
         </p>
 
     @empty
-        <p>Nu asunt disponibile vouchere personale in momentul actual</p>
+        <p>Nu sunt disponibile vouchere personale in momentul actual</p>
+    @endforelse
+    <hr>
+
+    {{-- === Coupoane Brand --}}
+    <div class="alert alert-info">
+        <p class="my-3"><b>Coupoane de Brand</b></p>
+    </div>
+    @forelse($coupons_brands as $coupon_brand)
+        <p>
+            Cod: <span class="text-info">{{ $coupon_brand->code }}</span>
+            Valoare: {{ $coupon_brand->value }} {{ $coupon_brand->percent ? '%' : 'RON' }} <br>
+            {{ $coupon_brand->description }}
+        </p>
+
+    @empty
+        <p>Nu asunt disponibile coupoane de Brand momentan</p>
     @endforelse
     <hr>
 @endsection

@@ -32,6 +32,17 @@
                 <p class="m-0"><a href="{{ route('brand.products', $brand->slug) }}">products
                         {{ $brand->products_count }}</a></p>
             </div>
+
+            @if ($brand_coupons)
+                @foreach ($brand_coupons as $coupon)
+                    <p class="text-warning bg-info p-2">{{ $loop->iteration }}. Cod <b>{{ $coupon->code }}</b> :
+                        {{ $coupon->description }}
+                    </p>
+                @endforeach
+            @endif
+
+
+
         </div>
     </div>
     {{-- end container --}}
@@ -43,7 +54,7 @@
 
             <div class="col-lg-9">
 
-                @include('front.content.carusel-photos',['carusel'=>$brand])
+                @include('front.content.carusel-photos', ['carusel' => $brand])
                 <div class="text-center my-5">
                     <h2 class="section-title px-5"><span class="px-2">Most popular {{ $brand->name }}
                             products</span></h2>

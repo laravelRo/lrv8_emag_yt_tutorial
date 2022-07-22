@@ -37,12 +37,12 @@
                                 type</label>
 
                             <select class="form-select" name="coupon_type">
-                                <option>Open this select menu</option>
+                                <option>Coupon Type</option>
                                 <option value="1" {{ $coupon->coupon_type == 1 ? 'selected' : '' }}>General</option>
                                 <option value="2" {{ $coupon->coupon_type == 2 ? 'selected' : '' }}>Categories
                                 </option>
                                 <option value="3" {{ $coupon->coupon_type == 3 ? 'selected' : '' }}>Users</option>
-                                <option value="3" {{ $coupon->coupon_type == 4 ? 'selected' : '' }}>Brands</option>
+                                <option value="4" {{ $coupon->coupon_type == 4 ? 'selected' : '' }}>Brands</option>
                             </select>
 
                             @error('coupon_type')

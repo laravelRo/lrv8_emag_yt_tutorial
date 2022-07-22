@@ -26,6 +26,14 @@
                 <p class="m-0"> <span class="text-muted">products ({{ $brand->products_count }})</span>
                 </p>
             </div>
+
+            @if ($brand_coupons)
+                @foreach ($brand_coupons as $coupon)
+                    <p class="text-warning bg-info p-2">{{ $loop->iteration }}. Cod <b>{{ $coupon->code }}</b> :
+                        {{ $coupon->description }}
+                    </p>
+                @endforeach
+            @endif
         </div>
     </div>
     <!-- Page Header End -->
@@ -72,7 +80,7 @@
                         <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                             {{-- numerotam produsele --}}
                             <span class="badge badge-secondary float-start">
-                                {{ $products->currentPage() > 1? $loop->iteration + $products->perPage() * ($products->currentPage() - 1): $loop->iteration }}
+                                {{ $products->currentPage() > 1 ? $loop->iteration + $products->perPage() * ($products->currentPage() - 1) : $loop->iteration }}
                             </span>
                             <div class="card product-item border-0 mb-4">
                                 <div
@@ -92,8 +100,7 @@
                                     <a href="{{ route('product', $product->slug) }}" class="btn btn-sm text-dark p-0"><i
                                             class="fas fa-eye text-primary mr-1"></i>View
                                         Detail</a>
-                                    @livewire('products.add-cart',
-                                    ['product_id'=>$product->id],key(time().'cart'.$product->id))
+                                    @livewire('products.add-cart', ['product_id' => $product->id], key(time() . 'cart' . $product->id))
                                 </div>
                             </div>
                         </div>

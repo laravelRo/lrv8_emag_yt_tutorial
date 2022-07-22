@@ -22,10 +22,21 @@ class BrandsController extends Controller
     {
         $brand = Brand::withCount('products')->where('slug', $slug)->first();
         $promo_products = $brand->products->sortBy('views')->take(3);
+
+        $brand_coupons = $brand->coupons()
+            ->select('code', 'description')
+            ->where('active', true)
+            ->where('expired_at', '>=', now())
+            ->get();
+
+
+
         return view('front.content.brand')
             ->with('brand', $brand)
-            ->with('promo_products', $promo_products);
+            ->with('promo_products', $promo_products)
+            ->with('brand_coupons', $brand_coupons);
     }
+
     public function viewBrandProducts($slug)
     {
         $brand = Brand::withCount('products')
@@ -33,8 +44,15 @@ class BrandsController extends Controller
             ->first();
         $products = $brand->publicProducts();
 
+        $brand_coupons = $brand->coupons()
+            ->select('code', 'description')
+            ->where('active', true)
+            ->where('expired_at', '>=', now())
+            ->get();
+
         return view('front.content.brand-products')
             ->with('brand', $brand)
-            ->with('products', $products);
+            ->with('products', $products)
+            ->with('brand_coupons', $brand_coupons);
     }
 }

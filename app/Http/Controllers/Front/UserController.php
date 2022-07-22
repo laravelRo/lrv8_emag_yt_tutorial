@@ -121,10 +121,16 @@ class UserController extends Controller
             ->where('coupon_type', 1)
             ->get();
 
+        $coupons_brands = Coupon::where('active', true)
+            ->where('expired_at', '>', now())
+            ->where('coupon_type', 4)
+            ->get();
+
         $vouchers = auth()->user()->couponsActive();
 
         return view('front.user.cpanel.coupons')
             ->with('coupons_gen', $coupons_gen)
-            ->with('vouchers', $vouchers);
+            ->with('vouchers', $vouchers)
+            ->with('coupons_brands', $coupons_brands);
     }
 }

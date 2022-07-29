@@ -37,7 +37,7 @@
                                 type</label>
 
                             <select class="form-select" name="coupon_type">
-                                <option>Coupon Type</option>
+
                                 <option value="1" {{ $coupon->coupon_type == 1 ? 'selected' : '' }}>General</option>
                                 <option value="2" {{ $coupon->coupon_type == 2 ? 'selected' : '' }}>Categories
                                 </option>
@@ -76,8 +76,7 @@
                         <div class="col-md-2">
                             <label for="value" class="form-label">Coupon Value</label>
                             <input type="numeric" name="value" class="form-control @error('value') is-invalid @enderror"
-                                id="value" value="{{ old('value', $coupon->value) }}"
-                                placeholder="enter coupon value">
+                                id="value" value="{{ old('value', $coupon->value) }}" placeholder="enter coupon value">
                             @error('value')
                                 <div class="invalid-feedback">
                                     {{ $message }}

@@ -6,6 +6,7 @@ use App\Models\User;
 use Livewire\Component;
 use App\Models\shop\Coupon;
 use App\Models\content\Brand;
+use App\Models\content\Section;
 use Illuminate\Support\Facades\DB;
 
 class Coupons extends Component
@@ -19,6 +20,14 @@ class Coupons extends Component
     public $coupon_brand_active;
     public $brands_free;
     public $brands_coupon;
+
+    public $coupon_categs_active;
+    public $sections;
+    public $section_id;
+    public $section_categs;
+    public $coupon_categs = [];
+    public $confirm_categs;
+
 
     // ====================
     //atasarea couponul unui utilizator
@@ -133,6 +142,88 @@ class Coupons extends Component
     // <<<<<< END=====================
     // ATASAREA BRANDURILOR LA UN COUPON
     // =========================
+
+
+    // ====================
+    //atasarea couponului categoriilor unei sectiuni
+    // ====================
+
+    public function openModalCategs($id)
+    {
+        $this->coupon_categs_active = Coupon::findOrFail($id);
+        //declansez butonul pentru afisarea ferestrei modale
+        $this->dispatchBrowserEvent('openCategsModal');
+
+        //intiez sectiunile active ale sitului
+        $this->sections = Section::with('categories')->select('id', 'name')
+            ->where('active', true)
+            ->orderBy('name')
+            ->get();
+
+        //verific daca couponul are deja categorii atasate
+        if ($this->coupon_categs_active->categories()->count()) {
+            $this->section_id = $this->coupon_categs_active->categories()->first()->section->id;
+
+            $this->section_categs = Section::findOrfail($this->section_id)
+                ->categories()
+                ->select('id', 'name')
+                ->orderBy('name')
+                ->get();
+
+            $this->coupon_categs = $this->coupon_categs_active->categories
+                ->pluck('id')
+                ->toArray();
+        }
+    }
+
+    public function selectSection($id)
+    {
+        if ($id == $this->coupon_categs_active->categories()->first()->section->id) {
+            $this->coupon_categs = $this->coupon_categs_active->categories
+                ->pluck('id')
+                ->toArray();
+        } else {
+            $this->coupon_categs = [];
+        }
+
+        $this->section_id = $id;
+
+
+        //initializez categoriile sectiunii
+        $section = Section::findOrFail($id);
+        $this->section_categs = $section->categories()
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+    }
+
+    public function attachCouponCategs()
+    {
+        $this->coupon_categs_active->categories()->sync($this->coupon_categs);
+        $this->confirm_categs = "Categoriile selectate au fost atasate couponului";
+    }
+    public function resetCategsModal()
+    {
+        $this->coupon_categs_active = null;
+        $this->coupon_categs = null;
+        $this->section_categs = null;
+        $this->sections = null;
+        $this->section_id = null;
+        $this->confirm_categs = null;
+    }
+
+    public function detachAllCategories()
+    {
+        $this->coupon_categs_active->categories()->detach();
+        $this->coupon_categs = [];
+        $this->confirm_categs = "Couponul nu mai are nici o categorie atasata";
+    }
+
+
+    // <<<<< END====================
+    //atasarea couponului categoriilor unei sectiuni
+    // ====================
+
 
 
 

@@ -35,7 +35,7 @@
                                 type</label>
 
                             <select class="form-select" name="coupon_type">
-                                <option selected>Select coupon type</option>
+                                <option selected class="text-info">Select coupon type</option>
                                 <option value="1">General</option>
                                 <option value="2">Categories</option>
                                 <option value="3">Users</option>

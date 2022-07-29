@@ -109,6 +109,34 @@ class Cart extends Model
 
                 return $brands_discount;
             }
+
+            //verific daca couponul este de tip categorii
+            if ($coupon_active['coupon_type'] == 2) {
+                //obtinem o colectie cu id-urile categoriilor couponului
+                $coupon_categs = Coupon::where('code', $coupon_active['code'])->first();
+                $coupon_categs_ids = $coupon_categs->categories->pluck('id');
+
+                $categs_discount = 0;
+
+                //iteram printre produsele din cos
+                foreach (Cart::cartProducts() as $cart_item) {
+
+                    //iteram printre categoriile prodului din cos
+                    foreach ($cart_item->product->categories as $categ) {
+                        if ($coupon_categs_ids->contains($categ->id)) {
+                            //calculam discountul
+                            if ($coupon_active['percent']) {
+                                $categs_discount += $cart_item->product->price * $cart_item->qty
+                                    * $coupon_active['value'] / 100;
+                            } else {
+                                $categs_discount  += $cart_item->qty * $coupon_active['value'];
+                            }
+                            break;
+                        }
+                    }
+                }
+                return $categs_discount;
+            }
         } else {
             return 0;
         }

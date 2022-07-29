@@ -4,6 +4,7 @@ namespace App\Models\shop;
 
 use App\Models\User;
 use App\Models\content\Brand;
+use App\Models\content\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -25,5 +26,11 @@ class Coupon extends Model
     public function brands()
     {
         return $this->morphedByMany(Brand::class, 'couponable');
+    }
+
+    //relatia inversa many-to-many polimorfica cu categoriile
+    public function categories()
+    {
+        return $this->morphedByMany(Category::class, 'couponable');
     }
 }

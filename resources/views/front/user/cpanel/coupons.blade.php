@@ -8,8 +8,13 @@
     </div>
     @forelse($coupons_gen as $coupon_gen)
         <p>
+            @if ($coupon_gen->amount > 0)
+                <b>Valoare minima comanda:</b> <span class="text-info">{{ $coupon_gen->amount }}</span>
+                <br>
+            @endif
             Cod: <span class="text-info">{{ $coupon_gen->code }}</span>
-            Valoare: {{ $coupon_gen->value }} {{ $coupon_gen->percent ? '%' : 'RON' }} <br>
+
+            Valoare: <span class="text-info">{{ $coupon_gen->value }} {{ $coupon_gen->percent ? '%' : 'RON' }}</span> <br>
             {{ $coupon_gen->description }}
         </p>
 
@@ -24,8 +29,13 @@
     </div>
     @forelse($vouchers as $voucher)
         <p>
+            @if ($voucher->amount > 0)
+                <b>Valoare minima comanda:</b> <span class="text-info">{{ $voucher->amount }}</span>
+                <br>
+            @endif
             Cod: <span class="text-info">{{ $voucher->code }}</span>
-            Valoare: {{ $voucher->value }} {{ $voucher->percent ? '%' : 'RON' }} <br>
+
+            Valoare: <span class="text-info">{{ $voucher->value }} {{ $voucher->percent ? '%' : 'RON' }}</span> <br>
             {{ $voucher->description }}
         </p>
 
@@ -40,13 +50,38 @@
     </div>
     @forelse($coupons_brands as $coupon_brand)
         <p>
+            @if ($coupon_brand->amount > 0)
+                Valoare minima comanda: <span class="text-info">{{ $coupon_brand->amount }}</span>
+                <br>
+            @endif
             Cod: <span class="text-info">{{ $coupon_brand->code }}</span>
-            Valoare: {{ $coupon_brand->value }} {{ $coupon_brand->percent ? '%' : 'RON' }} <br>
+            Valoare: <span class="text-info">{{ $coupon_brand->value }} {{ $coupon_brand->percent ? '%' : 'RON' }}</span>
+            <br>
             {{ $coupon_brand->description }}
         </p>
 
     @empty
         <p>Nu asunt disponibile coupoane de Brand momentan</p>
+    @endforelse
+    <hr>
+
+    {{-- === Coupoane categorii --}}
+    <div class="alert alert-info">
+        <p class="my-3"><b>Coupoane pentru categorii de produse</b></p>
+    </div>
+    @forelse($coupons_categs as $coupon_categ)
+        <p>
+            Cod: <span class="text-info">{{ $coupon_categ->code }}</span>
+            @if ($coupon_categ->amount > 0)
+                Valoare minima comanda: <span class="text-info">{{ $coupon_categ->amount }}</span>
+                <br>
+            @endif
+            Valoare: {{ $coupon_categ->value }} {{ $coupon_categ->percent ? '%' : 'RON' }} <br>
+            {{ $coupon_categ->description }}
+        </p>
+
+    @empty
+        <p>Nu asunt disponibile coupoane pentru momentan</p>
     @endforelse
     <hr>
 @endsection

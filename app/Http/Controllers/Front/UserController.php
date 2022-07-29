@@ -116,21 +116,32 @@ class UserController extends Controller
 
     public function showCoupons()
     {
+        //afisam coupoanele generale
         $coupons_gen = Coupon::where('active', true)
-            ->where('expired_at', '>', now())
+            ->where('expired_at', '>=', now())
             ->where('coupon_type', 1)
             ->get();
 
+        //afisam coupoanele de brand
         $coupons_brands = Coupon::where('active', true)
-            ->where('expired_at', '>', now())
+            ->where('expired_at', '>=', now())
             ->where('coupon_type', 4)
             ->get();
 
+        //afisam coupoanele de utilizator
         $vouchers = auth()->user()->couponsActive();
+
+        //afisam coupoanele pentru categorii
+        $coupons_categs = Coupon::where('active', true)
+            ->where('expired_at', '>=', now())
+            ->where('coupon_type', 2)
+            ->get();
+
 
         return view('front.user.cpanel.coupons')
             ->with('coupons_gen', $coupons_gen)
             ->with('vouchers', $vouchers)
-            ->with('coupons_brands', $coupons_brands);
+            ->with('coupons_brands', $coupons_brands)
+            ->with('coupons_categs', $coupons_categs);
     }
 }

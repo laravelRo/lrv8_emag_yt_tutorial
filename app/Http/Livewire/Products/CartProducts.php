@@ -76,6 +76,58 @@ class CartProducts extends Component
             }
         }
 
+        //pentru coupoanele de categorii verificam daca in cos exista vreun produs cu una dintre cateogriile couponului
+        if ($coupon->coupon_type == 2) {
+
+            //obtinem o colectie cu id-urile categoriilor couponului
+            $coupon_categs_ids = $coupon->categories->pluck('id');
+
+            $check = 0;
+            foreach (Cart::cartProducts() as $cart_item) {
+                //iteram prin categoriile fiecarui produs
+                foreach ($cart_item->product->categories as $prod_categ) {
+                    if ($coupon_categs_ids->contains($prod_categ->id)) {
+                        $check = 1;
+                        break;
+                    }
+
+                    if ($check == 1) {
+                        break;
+                    }
+                }
+            }
+
+            if ($check == 0) {
+                $this->user_message = "Acest coupon nu se poate aplica produselor din cos";
+                $this->code = null;
+                return;
+            }
+        }
+
+        //verificam daca produsele din cos apartin brandurilor couponului
+        if ($coupon->coupon_type == 4) {
+            //obtin o colectie cu id-urile brandurilor atasate couponului
+            $coupon_brands_ids = $coupon->brands->pluck('id');
+
+            $brand_check = 0;
+
+            foreach (Cart::cartProducts() as $cart_item) {
+
+                if ($coupon_brands_ids->contains($cart_item->product->brand->id)) {
+                    $brand_check = 1;
+                    break;
+                }
+            }
+
+
+            if ($brand_check == 0) {
+                $this->user_message = "Acest coupon nu se poate aplica produselor din cos";
+                $this->code = null;
+                return;
+            }
+        }
+
+
 
 
         session()->put('coupon_active', [

@@ -22,12 +22,14 @@
                         <th scope="col">#</th>
                         <th scope="col">Code</th>
                         <th scope="col">Description</th>
+                        <th scope="col">Type</th>
+
                         <th scope="col">Value</th>
                         <th scope="col">% / Fix</th>
 
                         <th scope="col">Amount</th>
                         <th scope="col">Expire</th>
-                        <th scope="col">Active</th>
+                        <th scope="col" style="max-width: 150px">Active</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -41,11 +43,25 @@
                             </td>
                             <td>{{ $coupon->code }}</td>
                             <td>{{ $coupon->description }}</td>
+                            <td>
+                                @if ($coupon->coupon_type == 2)
+                                    <span class="text-info"> categories</span>
+                                @endif
+                                @if ($coupon->coupon_type == 4)
+                                    <span class="text-info"> brands</span>
+                                @endif
+                                @if ($coupon->coupon_type == 3)
+                                    <span class="text-info"> users</span>
+                                @endif
+                                @if ($coupon->coupon_type == 1)
+                                    <span class="text-info"> general</span>
+                                @endif
+                            </td>
                             <td>{{ $coupon->value }}</td>
                             <td>{{ $coupon->percent ? '%' : 'Fix' }}</td>
                             <td>{{ $coupon->amount }}</td>
                             <td>{{ $coupon->expired_at->format('d-M Y') }}</td>
-                            <td style="width: 220px;">
+                            <td>
                                 @livewire('admin.sections-status', ['model' => $coupon, 'show_standard' => false], key(time() . $coupon->id))
                             </td>
                             <td>
@@ -68,6 +84,13 @@
                                         <i class="fab fa-buffer fa-2x"></i>
                                     </button>
                                 @endif
+                                @if ($coupon->coupon_type == 2)
+                                    <button id="{{ time() }}_categs_{{ $coupon->id }}" wire:ignore
+                                        wire:click="openModalCategs('{{ $coupon->id }}')"
+                                        class="btn btn-circle btn-sm btn-info">
+                                        <i class="fas fa-list fa-2x"></i>
+                                    </button>
+                                @endif
                             </td>
                         </tr>
                     @empty
@@ -83,6 +106,7 @@
         </div>
         @include('admin.content.coupons.modal-user-coupons')
         @include('admin.content.coupons.modal-brands-coupon')
+        @include('admin.content.coupons.modal-categs-coupon')
 
     </div>
 

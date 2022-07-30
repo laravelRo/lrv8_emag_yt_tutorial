@@ -178,13 +178,16 @@ class Coupons extends Component
 
     public function selectSection($id)
     {
-        if ($id == $this->coupon_categs_active->categories()->first()->section->id) {
-            $this->coupon_categs = $this->coupon_categs_active->categories
-                ->pluck('id')
-                ->toArray();
+        if ($this->coupon_categs_active->categories()->count() > 0) {
+            if ($id == $this->coupon_categs_active->categories()->first()->section->id) {
+                $this->coupon_categs = $this->coupon_categs_active->categories
+                    ->pluck('id')
+                    ->toArray();
+            }
         } else {
             $this->coupon_categs = [];
         }
+
 
         $this->section_id = $id;
 

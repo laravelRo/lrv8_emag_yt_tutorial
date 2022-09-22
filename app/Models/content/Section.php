@@ -41,4 +41,17 @@ class Section extends Model
     {
         return 'content/sections/' . $this->photo;
     }
+
+    //relatia many-to-many catre atribute
+    public function attributes()
+    {
+        return $this->belongsToMany(Attribute::class, 'attribute_section', 'section_id', 'attribute_id');
+    }
+    public function publicAttributes()
+    {
+        return $this->belongsToMany(Attribute::class, 'attribute_section', 'section_id', 'attribute_id')
+            ->where('active', true)
+            ->orderBy('position')
+            ->get();
+    }
 }

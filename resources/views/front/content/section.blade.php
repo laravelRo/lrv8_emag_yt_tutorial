@@ -6,7 +6,7 @@
     $section->meta_keywords
     ? $section->meta_keywords
     : 'Produsele R-Shop, filtrare pret produse,
-    filtrare culori, filtrare marimi, xl',)
+    filtrare culori, filtrare marimi, xl')
 
 @section('content')
 
@@ -45,17 +45,17 @@
     <div class="container-fluid pt-5">
         <div class="row px-xl-5">
             <div class="col-lg-3 col-md-12">
-                @include('front.filters.price')
+                {{-- @include('front.filters.price')
 
                 @include('front.filters.colors')
 
-                @include('front.filters.size')
+                @include('front.filters.size') --}}
 
             </div>
 
             <div class="col-lg-9 col-md-12">
                 <div class="row pb-3">
-                    @forelse ($section->categories as $category )
+                    @forelse ($section->categories as $category)
                         {{-- ===>>> afisam cateogriile sectiunii --}}
                         <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                             <div class="card product-item border-0 mb-4">
@@ -71,8 +71,8 @@
                                     </a>
                                 </div>
                                 <div class="card-footer d-flex justify-content-between bg-light border">
-                                    <a href="{{ route('category', $category->slug) }}"
-                                        class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View
+                                    <a href="{{ route('category', $category->slug) }}" class="btn btn-sm text-dark p-0"><i
+                                            class="fas fa-eye text-primary mr-1"></i>View
                                         category page</a>
 
                                 </div>

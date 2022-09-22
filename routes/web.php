@@ -58,6 +58,9 @@ require __DIR__ . '/admin/content/orders.php';
 //rutele pentru administrarea coupoanelor
 require __DIR__ . '/admin/content/coupons.php';
 
+//rutele pentru atributele produselor
+require __DIR__ . '/admin/content/attributes.php';
+
 
 // ======================
 //rutele frontend pentru continut

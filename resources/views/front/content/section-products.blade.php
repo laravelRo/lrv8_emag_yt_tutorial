@@ -6,7 +6,7 @@
     $section->meta_keywords
     ? $section->meta_keywords
     : 'Produsele R-Shop, filtrare pret produse,
-    filtrare culori, filtrare marimi, xl',)
+    filtrare culori, filtrare marimi, xl')
 
 @section('content')
 
@@ -32,11 +32,36 @@
     <div class="container-fluid pt-5">
         <div class="row px-xl-5">
             <div class="col-lg-3 col-md-12">
-                @include('front.filters.price')
+
+                {{-- ===>>> FILTRELE CU ATRIBUTELE SECTIUNII --}}
+
+                @forelse($attributes as $attribute)
+                    <div class="border-bottom mb-4 pb-4">
+                        <h5 class="font-weight-semi-bold mb-4">{{ $attribute->name }}</h5>
+                        <form id="form-filter-{{ $attribute->id }}">
+                            @forelse($attribute->values as $value)
+                                <div
+                                    class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                                    <input type="checkbox" class="custom-control-input"
+                                        id="attribute-value-{{ $attribute->id }}-{{ $value->id }}">
+                                    <label class="custom-control-label"
+                                        for="attribute-value-{{ $attribute->id }}-{{ $value->id }}">{{ $value->name }}</label>
+                                    <span class="badge border font-weight-normal">100</span>
+                                </div>
+                            @empty
+                            @endforelse
+
+                        </form>
+                    </div>
+                @empty
+                @endforelse
+                <!-- ===>>> Attributes filter END -->
+
+                {{-- @include('front.filters.price')
 
                 @include('front.filters.colors')
 
-                @include('front.filters.size')
+                @include('front.filters.size') --}}
 
             </div>
 
@@ -71,7 +96,7 @@
                         <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                             {{-- numerotam produsele --}}
                             <span class="badge badge-secondary float-start">
-                                {{ $products->currentPage() > 1? $loop->iteration + $products->perPage() * ($products->currentPage() - 1): $loop->iteration }}
+                                {{ $products->currentPage() > 1 ? $loop->iteration + $products->perPage() * ($products->currentPage() - 1) : $loop->iteration }}
                             </span>
 
                             <div class="card product-item border-0 mb-4">
@@ -92,8 +117,7 @@
                                     <a href="{{ route('product', $product->slug) }}" class="btn btn-sm text-dark p-0"><i
                                             class="fas fa-eye text-primary mr-1"></i>View
                                         Detail</a>
-                                    @livewire('products.add-cart',
-                                    ['product_id'=>$product->id],key(time().'cart'.$product->id))
+                                    @livewire('products.add-cart', ['product_id' => $product->id], key(time() . 'cart' . $product->id))
                                 </div>
                             </div>
                         </div>

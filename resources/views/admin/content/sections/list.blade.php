@@ -65,12 +65,17 @@
                                         {{ $section->position }}
                                     </td>
                                     <td style="width: 220px;">
-                                        @livewire('admin.sections-status',['model'=>$section])
+                                        @livewire('admin.sections-status', ['model' => $section])
                                     </td>
 
                                     <td style="width: 100px;">
                                         <a title="Editeaza sectiune" href="{{ route('sections.edit', $section->id) }}"
                                             class="btn btn-success btn-sm btn-circle"><i class="fas fa-edit fa-2x"></i>
+                                        </a>
+
+                                        <a title="Seteaza atriutele sectiunii"
+                                            href="{{ route('admin.attributes.set.section', $section->id) }}"
+                                            class="btn btn-warning btn-sm btn-circle"><i class="fas fa-list fa-2x"></i>
                                         </a>
                                         <button class="btn btn-danger btn-sm btn-circle" onclick="">
                                             <i class="fas fa-minus-square fa-2x"></i>
@@ -90,5 +95,4 @@
             </div>
         </div>
     </main>
-
 @endsection

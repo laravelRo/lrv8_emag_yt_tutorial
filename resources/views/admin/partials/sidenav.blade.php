@@ -29,17 +29,24 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-shopping-basket"></i></div>
                 Products
             </a>
+            {{-- linkul catre pagina principala pentru atributele produselor --}}
+            <a class="nav-link" href="{{ route('admin.attributes.list') }}">
+                <div class="sb-nav-link-icon"><i class="fas fa-swatchbook"></i></div>
+                Attributes
+            </a>
             <div class="sb-sidenav-menu-heading">Orders</div>
             {{-- linkul catre pagina principala de comenzi --}}
             <a class="nav-link" href="{{ route('admin.orders.list') }}">
                 <div class="sb-nav-link-icon"><i class="fab fa-shopify"></i></div>
                 Orders
             </a>
-            {{-- linkul catre pagina principala de comenzi --}}
+            {{-- linkul catre pagina principala a cupoanelor --}}
             <a class="nav-link" href="{{ route('admin.coupons.list') }}">
                 <div class="sb-nav-link-icon"><i class="fab fa-shopify"></i></div>
                 Coupons
             </a>
+
+
 
 
 

@@ -24,9 +24,11 @@ class SectionsController extends Controller
     {
         $section = Section::with('products')->where('slug', $slug)->first();
         $products = $section->publicProducts();
+        $attributes = $section->publicAttributes();
         return view('front.content.section-products')
             ->with('section', $section)
             ->with('products', $products)
+            ->with('attributes', $attributes)
             ->with('open', 0);
     }
 
@@ -56,9 +58,13 @@ class SectionsController extends Controller
     {
         $category = Category::withCount('products')->where('slug', $slug)->first();
         $products = $category->publicProducts();
+
+        $attributes = $category->section->publicAttributes();
+
         return view('front.content.category-products')
             ->with('category', $category)
             ->with('products', $products)
+            ->with('attributes', $attributes)
 
             ->with('open', false);
     }

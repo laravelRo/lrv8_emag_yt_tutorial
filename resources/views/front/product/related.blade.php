@@ -13,7 +13,7 @@
                              <img class="img-fluid w-100" src="{{ $related->photoUrl() }}" alt="">
                          </div>
                          <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                             <h6 class="text-truncate mb-3">$related->name</h6>
+                             <h6 class="text-truncate mb-3">{{ $related->name }}</h6>
                              <div class="d-flex justify-content-center">
                                  <h6>{{ $related->price }}</h6>
                                  <h6 class="text-muted ml-2">

@@ -3,8 +3,8 @@
 @section('content')
     <main>
         <div class="container-fluid px-4">
-            <h1 class="mt-4">Edit Product <span class="text-info">{{ $product->name }}</span> - <span
-                    class="text-danger">id: {{ $product->id }}</span>
+            <h1 class="mt-4">Edit Product <span class="text-info">{{ $product->name }}</span> - <span class="text-danger">id:
+                    {{ $product->id }}</span>
             </h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><a href="{{ route('control-panel') }}">Control Panel</a></li>
@@ -17,6 +17,13 @@
                         Gallery
                     </a>
                 </li>
+                @if ($product->suite_id > 0)
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('admin.suites.edit', $product->suite_id) }}">
+                            Suita: {{ $product->suite->name }}
+                        </a>
+                    </li>
+                @endif
             </ol>
 
             <div class="card p-4">
@@ -120,8 +127,7 @@
                         <div class="col-md-6">
 
                             <label for="description" class="form-label">Product excerpt* (max 700 chars)</label>
-                            <textarea name="excerpt" class="form-control @error('excerpt') is-invalid @enderror"
-                                id="excerpt" rows="5">{{ old('excerpt', $product->excerpt) }}</textarea>
+                            <textarea name="excerpt" class="form-control @error('excerpt') is-invalid @enderror" id="excerpt" rows="5">{{ old('excerpt', $product->excerpt) }}</textarea>
                             @error('excerpt')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -131,8 +137,8 @@
 
                         <div class="col-md-6">
                             <label for="presentation" class="form-label">Product presentation</label>
-                            <textarea name="presentation" class="form-control @error('presentation') is-invalid @enderror"
-                                id="presentation" rows="5">{{ old('presentation', $product->presentation) }}</textarea>
+                            <textarea name="presentation" class="form-control @error('presentation') is-invalid @enderror" id="presentation"
+                                rows="5">{{ old('presentation', $product->presentation) }}</textarea>
                             @error('presentation')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -164,16 +170,17 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" value="1" name="active" id="active1"
-                                    {{ old('active', $product->active) == 1 ? 'checked' : '' }} @if (is_null(old('active'))) checked @endif>
+                                <input class="form-check-input" type="radio" value="1" name="active"
+                                    id="active1" {{ old('active', $product->active) == 1 ? 'checked' : '' }}
+                                    @if (is_null(old('active'))) checked @endif>
                                 <label class="form-check-label" for="active1">
                                     Active
                                 </label>
 
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="active" id="active2" value="0"
-                                    {{ old('active', $product->active) === 0 ? 'checked' : '' }}>
+                                <input class="form-check-input" type="radio" name="active" id="active2"
+                                    value="0" {{ old('active', $product->active) === 0 ? 'checked' : '' }}>
                                 <label class="form-check-label" for="active2">
                                     Inactive
                                 </label>
@@ -189,15 +196,16 @@
 
                         <div class="col-md-2 align-bottom">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="promo" id="promo1" value="0"
-                                    {{ old('promo', $product->promo) === 0 ? 'checked' : '' }} @if (is_null(old('promo'))) checked @endif>
+                                <input class="form-check-input" type="radio" name="promo" id="promo1"
+                                    value="0" {{ old('promo', $product->promo) === 0 ? 'checked' : '' }}
+                                    @if (is_null(old('promo'))) checked @endif>
                                 <label class="form-check-label" for="active1">
                                     Standard
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="promo" id="promo2" value="1"
-                                    {{ old('promo', $product->promo) == 1 ? 'checked' : '' }}>
+                                <input class="form-check-input" type="radio" name="promo" id="promo2"
+                                    value="1" {{ old('promo', $product->promo) == 1 ? 'checked' : '' }}>
                                 <label class="form-check-label" for="promo2">
                                     Promo
                                 </label>
@@ -261,8 +269,8 @@
                         <div class="col-md-4">
                             <label for="meta_description" class="form-label">Meta description</label>
                             <input name="meta_description" type="text"
-                                class="form-control @error('meta_description') is-invalid @enderror" id="meta_description"
-                                value="{{ old('meta_description', $product->meta_description) }}">
+                                class="form-control @error('meta_description') is-invalid @enderror"
+                                id="meta_description" value="{{ old('meta_description', $product->meta_description) }}">
                             @error('meta_description')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -300,11 +308,9 @@
             </div>
         </div>
     </main>
-
 @endsection
 
 @section('customJs')
-
     <script>
         const chooseFile = document.getElementById("photoFile");
         const imgPreview = document.getElementById("img-preview");

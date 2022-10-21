@@ -15,4 +15,5 @@
   'products.cart-products' => 'App\\Http\\Livewire\\Products\\CartProducts',
   'products.check' => 'App\\Http\\Livewire\\Products\\Check',
   'products.count-cart' => 'App\\Http\\Livewire\\Products\\CountCart',
+  'products.suite-products' => 'App\\Http\\Livewire\\Products\\SuiteProducts',
 );

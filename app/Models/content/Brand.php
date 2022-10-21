@@ -46,6 +46,12 @@ class Brand extends Model
         return $this->morphMany(Photo::class, 'photoable');
     }
 
+    //has many suites
+    public function suites()
+    {
+        return $this->hasMany(Brand::class, 'brand_id');
+    }
+
     public function galleryUrl()
     {
         return '/photos/brands/' . $this->id . '/';

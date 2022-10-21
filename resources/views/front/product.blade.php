@@ -3,7 +3,7 @@
 @section('meta_title', 'Produsele emag')
 @section('meta_description',
     'Produsele emag cu posibilitatea de filtrare dupa culoare, marime, pret si de ordonare dupa
-    diverse criterii',)
+    diverse criterii')
 @section('meta_keywords', 'Produsele emag Laravel, filtrare pret produse, filtrare culori, filtrare marimi, xl')
 
 @section('content')
@@ -74,6 +74,13 @@
                     <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
                 </div>
 
+                {{-- ===produse din aceiasi suita === --}}
+                <div>
+                    <h4>Products in {{ $product->suite->name }}</h4>
+                </div>
+
+
+                {{-- === retele socializare --}}
                 <div class="d-flex pt-2">
                     <p class="text-dark font-weight-medium mb-0 mr-2">Share on:</p>
                     <div class="d-inline-flex">

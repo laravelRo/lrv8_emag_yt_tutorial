@@ -28,6 +28,12 @@ class Product extends Model
         return $this->belongsTo(Brand::class, 'brand_id', 'id');
     }
 
+    //has one Suite
+    public function suite()
+    {
+        return $this->belongsTo(Suite::class, 'suite_id', 'id');
+    }
+
     //has many photos polimorphic
     public function photos()
     {

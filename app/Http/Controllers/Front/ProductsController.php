@@ -16,8 +16,24 @@ class ProductsController extends Controller
         $product->save();
 
         $related_products = $product->section->products->sortByDesc('views')->take(4);
+
+        if ($product->suite_id > 0) {
+            $suite_products = Product::select(['id', 'photo', 'slug', 'name'])
+                ->where('suite_id', $product->suite_id)
+                // ->where('suite_id', '>', 0)
+                ->where('id', '<>', $product->id)
+                ->orderBy('position')
+                ->get();
+        } else {
+            $suite_products = null;
+        }
+
+
+        // dd($suite_products->count());
+
         return view('front.content.product')
             ->with('related_products', $related_products)
-            ->with('product', $product);
+            ->with('product', $product)
+            ->with('suite_products', $suite_products);
     }
 }

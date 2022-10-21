@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Content\AttributesController;
+use App\Http\Controllers\admin\Content\SuitesController;
 
 Route::prefix('staff/content/attributes')
     ->middleware(['auth:staff'])
@@ -22,4 +23,25 @@ Route::prefix('staff/content/attributes')
         //ruta pentru sincronizarea atributelor unei sectiuni
         Route::post('section-attributes/{id}', [AttributesController::class, 'syncSectionAttribute'])
             ->name('sync.section');
+    });
+
+// ==== TURELE PENTRU SERIILE DE PRODUSE ===
+
+
+Route::prefix('staff/content/suites')
+    ->middleware(['auth:staff'])
+    ->name('admin.suites.')
+    ->group(function () {
+        //afisarea paginii principale pentru suitele de produse
+        Route::get('list', [SuitesController::class, 'listSuites'])->name('list');
+
+        //crearea unei suite noi de produse
+        Route::post('add', [SuitesController::class, 'addSuite'])->name('add');
+
+        //editarea unei suite
+        Route::get('edit/{id}', [SuitesController::class, 'editSuite'])->name('edit');
+        Route::put('update/{id}', [SuitesController::class, 'updateSuite'])->name('update');
+
+        //stergerea unei rute
+        Route::delete('delete/{id}', [SuitesController::class, 'deleteSuite'])->name('delete');
     });

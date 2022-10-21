@@ -5,7 +5,7 @@
     $product->meta_keywords
     ? $product->meta_keywords
     : 'R-Shop Product, product detail, best prices for this product
-    brands',)
+    brands')
 
 @section('content')
     <!-- Page Header Start -->
@@ -95,10 +95,28 @@
                         </div>
                     </div>
                     {{-- <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button> --}}
-                    @livewire('products.add-cart',
-                    ['product_id'=>$product->id],key(time().'cart'.$product->id))
+                    @livewire('products.add-cart', ['product_id' => $product->id], key(time() . 'cart' . $product->id))
                 </div>
 
+                {{-- === suite products === --}}
+
+                @if ($suite_products && $suite_products->count() > 1)
+                    <div>
+
+                        <h4>{{ $product->suite->name }} ({{ $suite_products->count() }}) </h4>
+
+
+                        @foreach ($suite_products as $suite_product)
+                            <a class="text-decoration-none" href="{{ route('product', $suite_product->slug) }}"
+                                title="{{ $suite_product->name }}">
+                                <img class="product-suite" src="{{ $suite_product->photoUrl() }}"
+                                    alt="{{ $suite_product->name }}" height="75">
+                            </a>
+                        @endforeach
+                    </div>
+                @endif
+
+                {{-- === social icons === --}}
                 <div class="d-flex pt-2">
                     <p class="text-dark font-weight-medium mb-0 mr-2">Share on:</p>
                     <div class="d-inline-flex">

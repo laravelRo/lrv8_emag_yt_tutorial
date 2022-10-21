@@ -31,6 +31,12 @@ class Section extends Model
             ->paginate(12);
     }
 
+    //has many suites
+    public function suites()
+    {
+        return $this->hasMany(Suite::class, 'section_id');
+    }
+
 
 
     public function photoUrl()

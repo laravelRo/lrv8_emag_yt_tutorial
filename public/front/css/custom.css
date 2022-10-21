@@ -2,6 +2,13 @@ img {
     max-width: 100%;
 }
 
+img.product-suite {
+    padding: 3px;
+    border: 1px solid grey;
+    border-radius: 3px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
 .product-header img {
     max-height: 250px;
     margin-top: 10px;

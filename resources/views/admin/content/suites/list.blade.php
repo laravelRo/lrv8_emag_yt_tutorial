@@ -82,67 +82,9 @@
 
             {{-- TABLE LIST --}}
             <h2 class="my-4 text-center text-info">Suites list</h2>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name (nr prods)</th>
-                        <th scope="col">Position</th>
-                        <th scope="col">Brand / Section</th>
-                        <th scope="col">Active</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse($suites as $suite)
-                        <tr>
-                            <td>
-                                {{ $suites->currentPage() > 1
-                                    ? $loop->iteration + $suites->perPage() * ($suites->currentPage() - 1)
-                                    : $loop->iteration }}
-                            </td>
-                            <td>
-                                {{ $suite->name }} (<span class="text-info">{{ $suite->products_count }} prods</span>)
-                            </td>
-                            <td>
-                                {{ $suite->position }}
-                            </td>
-                            <td>
-                                {{ $suite->brand->name }} / {{ $suite->section->name }}
-                            </td>
-                            <td>
-                                @livewire('admin.sections-status', ['model' => $suite, 'show_standard' => false])
-                            </td>
-                            <td>
-                                <a title="Edit suite" href="{{ route('admin.suites.edit', $suite->id) }}"
-                                    class="btn btn-success btn-sm btn-circle"><i class="fas fa-edit fa-2x"></i>
-                                </a>
-                                <form id="form-del-suite-{{ $suite->id }}" class="d-none"
-                                    action="{{ route('admin.suites.delete', $suite->id) }}" method="POST">
-                                    @csrf
-                                    @method('delete')
-
-                                </form>
-                                <a onclick="deleteConfirm('form-del-suite-{{ $suite->id }}', '{{ $suite->name }}')"
-                                    type="button" title="delete suite" href="#"
-                                    class="btn btn-danger btn-sm btn-circle"><i class="fas fa-trash fa-2x"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    @empty
-                        <div class="alert alert-info">
-                            Nu este inregistrata nici o suita de produse
-                        </div>
-                    @endforelse
-                </tbody>
-
-            </table>
-            {{-- END TABLE LIST --}}
-            <div class="my-3">
-                {{ $suites->links() }}
-            </div>
 
 
+            @livewire('admin.products-suites', ['brands' => $brands, 'sections' => $sections])
 
         </div>
     </main>

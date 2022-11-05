@@ -13,23 +13,13 @@ class SuitesController extends Controller
 {
     public function listSuites()
     {
-        $suites = Suite::withCount(['products'])
-            ->with([
-                'brand' => function ($query) {
-                    $query->select('id', 'name');
-                },
-                'section' => function ($query) {
-                    $query->select('id', 'name');
-                }
-            ])
-            ->orderBy('name')
-            ->paginate();
+
 
         $brands = Brand::select(['id', 'name'])->orderBy('name')->get();
         $sections = Section::select(['id', 'name'])->orderBy('name')->get();
 
         return view('admin.content.suites.list')
-            ->with('suites', $suites)
+
             ->with('brands', $brands)
             ->with('sections', $sections);
     }

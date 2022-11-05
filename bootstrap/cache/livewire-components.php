@@ -8,6 +8,7 @@
   'admin.order-items' => 'App\\Http\\Livewire\\Admin\\OrderItems',
   'admin.photos-upload' => 'App\\Http\\Livewire\\Admin\\PhotosUpload',
   'admin.product-photo' => 'App\\Http\\Livewire\\Admin\\ProductPhoto',
+  'admin.products-suites' => 'App\\Http\\Livewire\\Admin\\ProductsSuites',
   'admin.sections-status' => 'App\\Http\\Livewire\\Admin\\SectionsStatus',
   'admin.users' => 'App\\Http\\Livewire\\Admin\\Users',
   'products.add-cart' => 'App\\Http\\Livewire\\Products\\AddCart',

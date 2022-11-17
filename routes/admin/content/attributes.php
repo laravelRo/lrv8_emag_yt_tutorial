@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Content\AttributesController;
+use App\Http\Controllers\Admin\Content\ProductsAttributes;
 use App\Http\Controllers\admin\Content\SuitesController;
 
+
+// ==== RUTELE PENTRU ATRIBUTELE SECTIUNILOR ===
 Route::prefix('staff/content/attributes')
     ->middleware(['auth:staff'])
     ->name('admin.attributes.')
@@ -25,7 +28,18 @@ Route::prefix('staff/content/attributes')
             ->name('sync.section');
     });
 
-// ==== TURELE PENTRU SERIILE DE PRODUSE ===
+// ==== RUTELE PENTRU ATRIBUTELE PRODUSELOR===
+
+Route::prefix('staff/content/products/attributes')
+    ->middleware(['auth:staff'])
+    ->name('admin.products.attributes.')
+    ->group(function () {
+        //afisam pagina de editare a atributelor pentru un singur produs
+        Route::get('show-attributes-values/{id}/{currentPage?}', [ProductsAttributes::class, 'showProductsAttributes'])->name('list');
+    });
+
+
+// ==== RUTELE PENTRU SERIILE DE PRODUSE ===
 
 
 Route::prefix('staff/content/suites')

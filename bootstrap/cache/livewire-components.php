@@ -1,5 +1,6 @@
 <?php return array (
   'admin.admin-products' => 'App\\Http\\Livewire\\Admin\\AdminProducts',
+  'admin.attribute-attach' => 'App\\Http\\Livewire\\Admin\\AttributeAttach',
   'admin.attributes-values' => 'App\\Http\\Livewire\\Admin\\AttributesValues',
   'admin.change-position' => 'App\\Http\\Livewire\\Admin\\ChangePosition',
   'admin.coupons' => 'App\\Http\\Livewire\\Admin\\Coupons',

@@ -24,4 +24,10 @@ class Attribute extends Model
     {
         return $this->belongsToMany(Section::class, 'attribute_section', 'attribute_id', 'section_id');
     }
+
+    //relatia polimorfica many-to-many atribute-produse
+    public function products()
+    {
+        return $this->morphedByMany(Product::class, 'attributable');
+    }
 }

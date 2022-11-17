@@ -57,4 +57,10 @@ class Product extends Model
     {
         return '/photos/products/' . $this->id . '/';
     }
+
+    //relatia inversa many-to-many polimorfica cu atributele
+    public function attributes()
+    {
+        return $this->morphToMany(Attribute::class, 'attributable')->withPivot('value');
+    }
 }

@@ -120,7 +120,7 @@
                     <td wire:ignore.self width="200">
                         @livewire('admin.sections-status', ['model' => $product], key(time() . 'ap' . $product->id))
                     </td>
-                    <td width="150">
+                    <td width="180">
                         <a title="Editeaza produs {{ $product->name }}"
                             href="{{ route('products.edit', ['id' => $product->id, 'currentPage' => $products->currentPage()]) }}"
                             class="btn btn-success btn-sm btn-circle"><i class="fas fa-edit fa-2x"></i>
@@ -133,6 +133,9 @@
                             class="btn btn-warning btn-sm btn-circle">
                             <i class="fas fa-list-alt fa-2x"></i>
                         </button>
+                        <a class="btn btn-light btn-sm btn-circle"
+                            href="{{ route('admin.products.attributes.list', ['id' => $product->id, 'currentPage' => $products->currentPage()]) }}"><i
+                                class="fas fa-tasks fa-2x"></i></a>
                     </td>
 
 

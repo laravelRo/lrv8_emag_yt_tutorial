@@ -92,6 +92,7 @@ class ProductsController extends Controller
     public function editProduct($id, $currentPage = 1)
     {
 
+
         $sections = Section::all(['id', 'name'])->sortBy('name');
         $brands = Brand::all(['id', 'name'])->sortBy('name');
 

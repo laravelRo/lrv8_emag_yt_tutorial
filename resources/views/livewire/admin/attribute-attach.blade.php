@@ -14,7 +14,7 @@
             @endif
         @empty
             <div class="alert-alert-info">
-                Atributul nu are nici o valoare setata
+                Atributul nu are nici o valoare setata &roarr;
             </div>
         @endforelse
 

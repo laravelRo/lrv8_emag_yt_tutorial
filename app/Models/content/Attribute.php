@@ -28,6 +28,6 @@ class Attribute extends Model
     //relatia polimorfica many-to-many atribute-produse
     public function products()
     {
-        return $this->morphedByMany(Product::class, 'attributable');
+        return $this->morphedByMany(Product::class, 'attributable')->withPivot('value');
     }
 }

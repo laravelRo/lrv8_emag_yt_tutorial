@@ -31,6 +31,35 @@ img.product-suite {
 
 }
 
+.owl-item {
+    height: 400px;
+
+}
+
+.rangeinput {
+    position: relative;
+    height: 50px;
+
+
+}
+
+.rangeinput .field {
+    position: absolute;
+    top: 10px;
+    height: 45px;
+    width: 100%;
+}
+
+.rangeinput .field input {
+    pointer-events: none;
+}
+
+
+.range-labels {
+    display: flex;
+    justify-content: space-between;
+}
+
 .list-category a h3 {
     color: brown;
     transition: all 0.5s;

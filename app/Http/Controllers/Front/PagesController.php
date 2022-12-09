@@ -14,7 +14,9 @@ class PagesController extends Controller
     //afisam pagina home
     public function homePage()
     {
-        $trandy_products = Product::all('name', 'price', 'discount', 'photo', 'slug')->sortByDesc('views')->take(4);
+        $trandy_products = Product::all('name', 'price', 'discount', 'photo', 'slug', 'brand_id')
+            ->sortByDesc('views')->take(4);
+
         $trandy_categories = Category::select('name', 'photo', 'slug')->withCount(['products'])
             ->where('promo', '=', 1)
             ->limit(6)

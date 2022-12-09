@@ -13,9 +13,12 @@
   'admin.sections-status' => 'App\\Http\\Livewire\\Admin\\SectionsStatus',
   'admin.users' => 'App\\Http\\Livewire\\Admin\\Users',
   'products.add-cart' => 'App\\Http\\Livewire\\Products\\AddCart',
+  'products.brand-products' => 'App\\Http\\Livewire\\Products\\BrandProducts',
   'products.cart-item' => 'App\\Http\\Livewire\\Products\\CartItem',
   'products.cart-products' => 'App\\Http\\Livewire\\Products\\CartProducts',
+  'products.category-products' => 'App\\Http\\Livewire\\Products\\CategoryProducts',
   'products.check' => 'App\\Http\\Livewire\\Products\\Check',
   'products.count-cart' => 'App\\Http\\Livewire\\Products\\CountCart',
+  'products.section-products' => 'App\\Http\\Livewire\\Products\\SectionProducts',
   'products.suite-products' => 'App\\Http\\Livewire\\Products\\SuiteProducts',
 );

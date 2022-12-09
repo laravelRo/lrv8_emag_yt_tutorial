@@ -5,7 +5,7 @@
     $brand->meta_keywords
     ? $brand->meta_keywords
     : 'R-Shop Brands, best products, best running
-    brands',)
+    brands')
 
 @section('content')
     <!-- Page Header Start -->
@@ -15,7 +15,7 @@
             <h1 class="font-weight-semi-bold text-uppercase my-3 ">{{ $brand->name }} -
                 <a href="{{ route('brand.products', $brand->slug) }}">
                     <span class="text-warning text-lowercase" style="font-size: 0.6em;">view products
-                        {{ $brand->products_count }}</span>
+                        {{ $brand->publicProducts()->total() }}</span>
                 </a>
             </h1>
             <img src="{{ $brand->photoUrl() }}" alt="">
@@ -30,7 +30,7 @@
 
                 <p class="m-0 px-2">-</p>
                 <p class="m-0"><a href="{{ route('brand.products', $brand->slug) }}">products
-                        {{ $brand->products_count }}</a></p>
+                        {{ $brand->publicProducts()->total() }}</a></p>
             </div>
 
             @if ($brand_coupons)

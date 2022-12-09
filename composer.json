@@ -13,7 +13,8 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.10",
-        "realrashid/sweet-alert": "^5.0"
+        "realrashid/sweet-alert": "^5.0",
+        "spatie/laravel-collection-macros": "^7.12"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

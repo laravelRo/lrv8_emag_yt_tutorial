@@ -92,4 +92,11 @@
       'Alert' => 'RealRashid\\SweetAlert\\Facades\\Alert',
     ),
   ),
+  'spatie/laravel-collection-macros' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\CollectionMacros\\CollectionMacroServiceProvider',
+    ),
+  ),
 );

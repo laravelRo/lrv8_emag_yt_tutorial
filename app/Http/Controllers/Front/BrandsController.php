@@ -20,7 +20,9 @@ class BrandsController extends Controller
     //pagina unui Brand
     public function viewBrand($slug)
     {
-        $brand = Brand::withCount('products')->where('slug', $slug)->first();
+        $brand = Brand::where('slug', $slug)->first();
+
+
         $promo_products = $brand->products->sortBy('views')->take(3);
 
         $brand_coupons = $brand->coupons()

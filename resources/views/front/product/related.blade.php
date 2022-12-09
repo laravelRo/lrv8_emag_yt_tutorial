@@ -7,7 +7,7 @@
          <div class="col">
              <div class="owl-carousel related-carousel">
                  @forelse($related_products as $related)
-                     <div class="card product-item border-0">
+                     {{-- <div class="card product-item border-0">
                          <div
                              class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                              <img class="img-fluid w-100" src="{{ $related->photoUrl() }}" alt="">
@@ -28,7 +28,8 @@
                              <a href="" class="btn btn-sm text-dark p-0"><i
                                      class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                          </div>
-                     </div>
+                     </div> --}}
+                     @include('front.partials.product-single', ['item' => $related])
                  @empty
                  @endforelse
 

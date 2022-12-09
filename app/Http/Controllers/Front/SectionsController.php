@@ -27,8 +27,8 @@ class SectionsController extends Controller
         $attributes = $section->publicAttributes();
         return view('front.content.section-products')
             ->with('section', $section)
-            ->with('products', $products)
-            ->with('attributes', $attributes)
+            // ->with('products', $products)
+            // ->with('attributes', $attributes)
             ->with('open', 0);
     }
 

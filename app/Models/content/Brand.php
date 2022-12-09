@@ -10,6 +10,8 @@ class Brand extends Model
 {
     use HasFactory;
 
+
+
     //has many products
     public function products()
     {

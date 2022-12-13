@@ -49,6 +49,24 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3">
+                <h3>Special Offers</h3>
+                @forelse($promo_products as $promo)
+                    <div class="card shadow my-3 border">
+                        <img src="{{ $promo->photoUrl() }}" class="card-img-top" alt=""
+                            title="{{ $promo->name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $promo->name }}</h5>
+                            {!! $promo->excerpt !!}
+                        </div>
+                        <div class="card-footer d-flex justify-content-between bg-light border">
+                            <a href="{{ route('product', $promo->slug) }}" class="btn btn-sm text-dark p-0"><i
+                                    class="fas fa-eye text-primary mr-1"></i>View
+                                Detail</a>
+                            @livewire('products.add-cart', ['product_id' => $promo->id], key(time() . 'cart' . $promo->id))
+                        </div>
+                    </div>
+                @empty
+                @endforelse
 
             </div>
 
@@ -60,31 +78,9 @@
                             products</span></h2>
                 </div>
                 <div class="row">
-                    @forelse($promo_products as $product)
+                    @forelse($popular_products as $product)
                         <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
-                            <div class="card product-item border-0 mb-4">
-                                <div
-                                    class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                    <img class="img-fluid w-100" src="{{ $product->photoUrl() }}" alt="">
-                                </div>
-                                <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                                    <h6 class="text-truncate mb-3">{{ $product->name }}</h6>
-                                    <div class="d-flex justify-content-center">
-                                        <h6>{{ $product->price }}</h6>
-                                        <h6 class="text-muted ml-2">
-                                            <del>{{ $product->price + ($product->price + $product->discount / 100) }}</del>
-                                        </h6>
-                                    </div>
-                                </div>
-                                <div class="card-footer d-flex justify-content-between bg-light border">
-                                    <a href="{{ route('product', $product->slug) }}" class="btn btn-sm text-dark p-0"><i
-                                            class="fas fa-eye text-primary mr-1"></i>View
-                                        Detail</a>
-                                    {{-- <a href="" class="btn btn-sm text-dark p-0"><i
-                                            class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a> --}}
-                                    @livewire('products.add-cart', ['product_id' => $product->id], key(time() . 'cart' . $product->id))
-                                </div>
-                            </div>
+                            @include('front.partials.product-single', ['item' => $product])
                         </div>
                     @empty
                     @endforelse

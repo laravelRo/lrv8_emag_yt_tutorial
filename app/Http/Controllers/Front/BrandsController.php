@@ -23,7 +23,20 @@ class BrandsController extends Controller
         $brand = Brand::where('slug', $slug)->first();
 
 
-        $promo_products = $brand->products->sortBy('views')->take(3);
+        $popular_products = $brand->products()
+            ->where('active', true)
+            ->orderByDesc('views')
+            ->limit(3)
+            ->get();
+        // ->random(3);
+
+        $promo_products = $brand->products()
+            ->where('active', true)
+            ->where('promo', true)
+            ->inRandomOrder()
+            ->limit(3)
+            ->get();
+        // ->random(3);
 
         $brand_coupons = $brand->coupons()
             ->select('code', 'description')
@@ -35,6 +48,7 @@ class BrandsController extends Controller
 
         return view('front.content.brand')
             ->with('brand', $brand)
+            ->with('popular_products', $popular_products)
             ->with('promo_products', $promo_products)
             ->with('brand_coupons', $brand_coupons);
     }

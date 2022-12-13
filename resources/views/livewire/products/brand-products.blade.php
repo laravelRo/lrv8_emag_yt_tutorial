@@ -9,6 +9,7 @@
 
         {{-- === range input for price --}}
         <div class="wrapper">
+            <p class="text-center" style="color:#3264fe">Price range</p>
             <div class="values">
                 <span id="range1">
                     {{ $minPriceSelected }}

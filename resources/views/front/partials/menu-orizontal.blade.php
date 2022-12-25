@@ -8,19 +8,28 @@
      </button>
      <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
          <div class="navbar-nav mr-auto py-0">
-             <a href="{{ route('home') }}"
-                 class="nav-item nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
-             <a href="{{ route('shop') }}" class="nav-item nav-link">Shop</a>
-             <a href="" class="nav-item nav-link">Shop Detail</a>
+             <a href="{{ route('home') }}" class="nav-item nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
+                 Home
+             </a>
              <div class="nav-item dropdown">
-                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Products</a>
                  <div class="dropdown-menu rounded-0 m-0">
-                     <a href="{{ route('cart') }}" class="dropdown-item">Shopping Cart</a>
-                     <a href="{{ route('check') }}" class="dropdown-item">Checkout</a>
+                     @forelse($sections_prods as $section_prod)
+                         <a href="{{ route('section.products', $section_prod->slug) }}"
+                             class="dropdown-item">{{ $section_prod->name }} ({{ $section_prod->products_count }})</a>
+                     @empty
+                     @endforelse
+
                  </div>
              </div>
              <a href="{{ route('brands') }}"
-                 class="nav-item nav-link {{ request()->routeIs('brands') ? 'active' : '' }}">Brands</a>
+                 class="nav-item nav-link {{ request()->routeIs('brands') ? 'active' : '' }}">
+                 Brands
+             </a>
+             <a href="" class="nav-item nav-link">Contact</a>
+             <a href="" class="nav-item nav-link">About Us</a>
+
+
          </div>
 
          <div class="navbar-nav ml-auto py-0">

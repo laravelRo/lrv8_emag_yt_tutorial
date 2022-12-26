@@ -36,4 +36,28 @@ class ProductsController extends Controller
             ->with('product', $product)
             ->with('suite_products', $suite_products);
     }
+
+    public function searchProduct(Request $request)
+    {
+        $request->validate(
+            [
+                'search' => 'required|min:3'
+            ],
+            [
+                'search.required' => 'trebuie sa introduceti cel putin 3 caractere pentru a efectua o cautare',
+                'search.min' => 'trebuie sa introduceti cel putin 3 caractere pentru a efectua o cautare'
+            ]
+
+        );
+        $products = Product::where('active', true)
+            ->where('name', 'LIKE', "%$request->search%")
+            ->orWhere('meta_keywords', 'LIKE', "%$request->search%")
+            ->orWhere('meta_description', 'LIKE', "%$request->search%")
+            ->paginate(12)
+            ->withQueryString();
+
+        return view('front.search')
+            ->with('products', $products)
+            ->with('search_term', $request->search);
+    }
 }

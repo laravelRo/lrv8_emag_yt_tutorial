@@ -6,14 +6,21 @@
          </a>
      </div>
      <div class="col-lg-6 col-6 text-left">
-         <form action="">
+         <form action="{{ route('products.search') }}" method="GET">
+             @csrf
              <div class="input-group">
-                 <input type="text" class="form-control" placeholder="Search for products">
+                 <input name="search" type="text" class="form-control @error('search') is-invalid @enderror"
+                     placeholder="Search for products">
                  <div class="input-group-append">
-                     <span class="input-group-text bg-transparent text-primary">
+                     <button type="submit" class="input-group-text bg-transparent text-primary">
                          <i class="fa fa-search"></i>
-                     </span>
+                     </button>
                  </div>
+                 @error('search')
+                     <div id="validationServer04Feedback" class="invalid-feedback">
+                         {{ $message }}
+                     </div>
+                 @enderror
              </div>
          </form>
      </div>

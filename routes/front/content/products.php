@@ -24,3 +24,6 @@ Route::get('brand/products/{slug}', [BrandsController::class, 'viewBrandProducts
 
 // routa unui produs
 Route::get('product/{slug}', [ProductsController::class, 'showProduct'])->name('product');
+
+//routa de cautare produse
+Route::get('products/search', [ProductsController::class, 'searchProduct'])->name('products.search');

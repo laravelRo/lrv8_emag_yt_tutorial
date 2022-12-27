@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
+use App\Models\shop\OrderItem;
 use App\Models\content\Product;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class ProductsController extends Controller
@@ -56,8 +58,19 @@ class ProductsController extends Controller
             ->paginate(12)
             ->withQueryString();
 
+        $top_ten = OrderItem::with(['product' => function ($query) {
+            $query->select('id', 'name', 'slug', 'photo');
+            $query->where('active', true);
+        }])
+            ->select(DB::raw('product_id, product_name, qty, sum(qty) as sum_qty'))
+            ->groupBy('product_id')
+            ->orderByDesc('sum_qty')
+            ->limit(10)
+            ->get();
+
         return view('front.search')
             ->with('products', $products)
-            ->with('search_term', $request->search);
+            ->with('search_term', $request->search)
+            ->with('top_ten', $top_ten);
     }
 }

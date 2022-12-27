@@ -25,7 +25,30 @@
     <div class="container-fluid pt-5">
         <div class="row px-xl-5">
             <div class="col-lg-3 mb-5">
+                <div class="card my-3 p-2">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h5>Top 10 sales</h5>
+                        </div>
+                        <ul class="list-group shadow">
+                            @forelse($top_ten as $top_product)
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <a href="{{ route('product', $top_product->product->slug) }}">
+                                        <img src="{{ $top_product->product->photoUrl() }}" class="rounded float-left mr-1"
+                                            alt="" width="70">
+                                        {{ $top_product->product->name }}
+                                    </a>
+                                    <span class="badge badge-primary badge-pill">{{ $top_product->sum_qty }}</span>
 
+                                </li>
+
+                            @empty
+                            @endforelse
+                        </ul>
+                    </div>
+
+
+                </div>
             </div>
             <div class="col-lg-9 mb-5">
                 <div class="row my-3">
